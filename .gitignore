@@ -1,0 +1,7 @@
+data/*
+pre/*
+runs/*
+runs_nesy/*
+**/__pycache__/**
+weights/*
+baselines/*
