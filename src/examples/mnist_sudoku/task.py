@@ -155,13 +155,13 @@ class MNISTSudokuTask(NeSyTask):
         parser.add_argument(
             "--mnist-sudoku-root",
             type=Path,
-            default=Path("/home/moriyama/ASP/Sudoku/sudoku4"),
+            default=Path("./data/mnist_sudoku"),
             help="Root directory for MNIST Sudoku tensors.",
         )
         parser.add_argument(
             "--mnist-root",
             type=Path,
-            default=Path("/home/moriyama/ASP/GNN-ASP/data"),
+            default=Path("./data"),
             help="Root directory for MNIST.",
         )
         parser.add_argument("--mnist-sudoku-train-fraction", type=float, default=0.9, help="Train split fraction.")

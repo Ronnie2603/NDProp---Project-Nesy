@@ -49,8 +49,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--dlv-path",
         type=str,
-        default="../dlv",
-        help="Path to DLV executable for WFS cross-checks.",
+        default=None,
+        help="Optional DLV executable for WFS cross-checks.",
     )
     parser.add_argument(
         "--output-dir",
@@ -178,8 +178,11 @@ def _check_wfs_with_dlv(
     heads: Sequence[int],
     pos: Sequence[Sequence[int]],
     neg: Sequence[Sequence[int]],
-    dlv_path: str,
+    dlv_path: Optional[str],
 ) -> None:
+    if not dlv_path:
+        print("Skipping DLV WFS cross-check because --dlv-path was not provided.")
+        return
     truth, falsity = _well_founded_initializer(len(atoms), heads, pos, neg)
     true_atoms = {atom for atom, val in zip(atoms, truth) if val}
     false_atoms = {atom for atom, val in zip(atoms, falsity) if val}

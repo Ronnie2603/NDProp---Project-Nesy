@@ -21,14 +21,15 @@ class Apply2x2Task(NeSyTask):
     description = "2x2 grid operator application with provided digits and operator images."
 
     def add_args(self, parser: argparse.ArgumentParser) -> None:
-        parser.add_argument("--train-pairs", type=Path, default=None, help="Training pairs file.")
-        parser.add_argument("--eval-pairs", type=Path, default=None, help="Eval pairs file (defaults to train).")
+        indexes_dir = Path(__file__).resolve().parents[3] / "indexes"
+        parser.add_argument("--train-pairs", type=Path, default=indexes_dir / "apply2x2_train_10000.txt", help="Training pairs file.")
+        parser.add_argument("--eval-pairs", type=Path, default=indexes_dir / "apply2x2_test.txt", help="Eval pairs file.")
         parser.add_argument("--train-limit", type=int, default=3000, help="Cap training samples (-1 for all).")
         parser.add_argument("--eval-limit", type=int, default=1000, help="Cap eval samples (-1 for all).")
         parser.add_argument("--program-path", type=Path, default=None, help="Path to ASP program (lp/aspif).")
         parser.add_argument("--clingo-path", type=str, default=None, help="Optional clingo executable.")
-        parser.add_argument("--op-root", type=Path, default=Path("./data/hasy"), help="Root directory for operator images.")
-        parser.add_argument("--op-train-subdir", type=str, default="train", help="Operator train subdirectory.")
+        parser.add_argument("--op-root", type=Path, default=Path("./assets/operator_images/hasy"), help="Root directory for operator images.")
+        parser.add_argument("--op-train-subdir", type=str, default="train_apply2x2", help="Operator train subdirectory.")
         parser.add_argument("--op-eval-subdir", type=str, default="test_apply2x2", help="Operator eval subdirectory.")
 
     def build_model(self, args: argparse.Namespace, device: torch.device) -> torch.nn.Module:

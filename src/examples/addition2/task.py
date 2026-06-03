@@ -28,9 +28,10 @@ class Addition2Task(NeSyTask):
     description = "Four-digit addition producing a two-digit sum."
 
     def add_args(self, parser: argparse.ArgumentParser) -> None:
+        indexes_dir = Path(__file__).resolve().parents[3] / "indexes"
         parser.add_argument("--mnist-root", type=Path, default=Path("./data"), help="Root directory for MNIST.")
-        parser.add_argument("--train-pairs", type=Path, default=None, help="Optional training pairs file.")
-        parser.add_argument("--eval-pairs", type=Path, default=None, help="Optional eval pairs file.")
+        parser.add_argument("--train-pairs", type=Path, default=indexes_dir / "mnistAdd2_train.txt", help="Optional training pairs file.")
+        parser.add_argument("--eval-pairs", type=Path, default=indexes_dir / "mnistAdd2_test.txt", help="Optional eval pairs file.")
         parser.add_argument("--train-limit", type=int, default=-1, help="Cap training samples (-1 for all).")
         parser.add_argument("--eval-limit", type=int, default=1000, help="Cap eval samples (-1 for all).")
         parser.add_argument("--program-path", type=Path, default=None, help="Path to ASP program (lp/aspif).")

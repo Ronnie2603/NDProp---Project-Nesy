@@ -6,7 +6,7 @@ from typing import Sequence, Tuple, Callable
 import torch
 from torch.utils.data import Dataset
 
-SUDOKU_BASE = Path("/home/moriyama/ASP/Sudoku/sudoku")
+SUDOKU_BASE = Path("./data/mnist_sudoku")
 
 
 def _load_tensor(path: Path) -> torch.Tensor:
@@ -44,18 +44,18 @@ def _prepare_images(ximg: torch.Tensor) -> torch.Tensor:
 
 
 def _prepare_labels(y: torch.Tensor) -> torch.Tensor:
-    if y.dim() >= 3 and y.size(-1) in (4, 9) and y.size(-1) == y.size(-2):
-        # One-hot per cell: (N, 9, 9, 9) or (N, 81, 9)
-        labels = y.argmax(dim=-1).view(y.size(0), -1).long()
-        if labels.numel() > 0 and labels.min() >= 1:
-            labels = labels - 1
-        return labels
-    if y.dim() == 3 and y.size(1) == 9 and y.size(2) == 9:
+    if y.dim() == 3 and y.size(1) == y.size(2) and not torch.is_floating_point(y):
         labels = y.view(y.size(0), -1).long()
         if labels.numel() > 0 and labels.min() >= 1:
             labels = labels - 1
         return labels
-    if y.dim() == 2 and y.size(1) == 81:
+    if y.dim() >= 3 and y.size(-1) in (4, 9):
+        # One-hot per cell: (N, 4, 4, 4), (N, 9, 9, 9), (N, 16, 4), or (N, 81, 9).
+        labels = y.argmax(dim=-1).view(y.size(0), -1).long()
+        if labels.numel() > 0 and labels.min() >= 1:
+            labels = labels - 1
+        return labels
+    if y.dim() == 2 and y.size(1) in (16, 81):
         labels = y.long()
         if labels.numel() > 0 and labels.min() >= 1:
             labels = labels - 1

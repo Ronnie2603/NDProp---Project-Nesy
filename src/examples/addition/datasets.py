@@ -55,13 +55,15 @@ class AdditionDataset(Dataset):
                     break
         return pairs
 
-    def _sample_pairs(self, *, limit: Optional[int]) -> list[Tuple[int, int]]:
+    def _sample_pairs(self, *, limit: Optional[int]) -> list[Tuple[int, int, int]]:
         population = list(range(len(self.mnist)))
-        pairs: list[Tuple[int, int]] = []
+        labels = self.mnist.targets
+        pairs: list[Tuple[int, int, int]] = []
         for idx in population:
             for _ in range(self.pairs_per_sample):
                 partner = self.rng.choice(population)
-                pairs.append((idx, partner))
+                total = int(labels[idx]) + int(labels[partner])
+                pairs.append((idx, partner, total))
         self.rng.shuffle(pairs)
         if limit is not None and limit >= 0:
             return pairs[:limit]

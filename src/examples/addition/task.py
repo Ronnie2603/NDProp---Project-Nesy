@@ -21,14 +21,14 @@ class AdditionTask(NeSyTask):
     description = "MNIST digit pair addition with single-digit sum."
 
     def add_args(self, parser: argparse.ArgumentParser) -> None:
-        project_root = Path(__file__).resolve().parents[2]
-        neurasp_dir = project_root.parent / "NeurASP" / "examples" / "mnistAdd" / "data"
+        project_root = Path(__file__).resolve().parents[3]
+        indexes_dir = project_root / "indexes"
         parser.add_argument("--mnist-root", type=Path, default=Path("./data"), help="Root directory for MNIST.")
         parser.add_argument("--pairs-per-sample", type=int, default=2, help="Random pairs sampled per digit.")
         parser.add_argument("--train-limit", type=int, default=30000, help="Max training pairs to sample (-1 for all).")
         parser.add_argument("--eval-limit", type=int, default=1000, help="Max eval pairs to sample (-1 for all).")
-        parser.add_argument("--train-pairs", type=Path, default=neurasp_dir / "train_data.txt", help="Optional NeurASP pairs file.")
-        parser.add_argument("--eval-pairs", type=Path, default=neurasp_dir / "test_data.txt", help="Optional NeurASP eval pairs file.")
+        parser.add_argument("--train-pairs", type=Path, default=indexes_dir / "mnistAdd_train.txt", help="Optional training pairs file.")
+        parser.add_argument("--eval-pairs", type=Path, default=indexes_dir / "mnistAdd_test.txt", help="Optional eval pairs file.")
         parser.add_argument("--program-path", type=Path, default=None, help="Path to ASP program (lp/aspif).")
         parser.add_argument("--clingo-path", type=str, default=None, help="Optional clingo executable.")
 

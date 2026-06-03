@@ -6,9 +6,6 @@ from examples.add2x2 import Add2x2Task
 from examples.apply2x2 import Apply2x2Task
 from examples.addition import AdditionTask
 from examples.addition2 import Addition2Task
-from examples.awa import AwATask
-from examples.cubs import CUBSTask
-from examples.hmcnn import HMCNNTask
 from examples.mnist_sudoku import MNISTSudokuTask
 from examples.member3 import Member3Task
 from examples.member5 import Member5Task
@@ -22,8 +19,5 @@ TASKS: Dict[str, NeSyTask] = {
     Apply2x2Task.name: Apply2x2Task(),
     Member3Task.name: Member3Task(),
     Member5Task.name: Member5Task(),
-    AwATask.name: AwATask(),
-    CUBSTask.name: CUBSTask(),
-    HMCNNTask.name: HMCNNTask(),
     MNISTSudokuTask.name: MNISTSudokuTask(),
 }

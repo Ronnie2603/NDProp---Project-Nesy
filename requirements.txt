@@ -1,0 +1,10 @@
+clingo
+matplotlib
+numpy
+pillow
+scikit-learn
+torch
+torch-geometric
+torch-scatter
+torchvision
+tqdm

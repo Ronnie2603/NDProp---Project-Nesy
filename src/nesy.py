@@ -237,6 +237,23 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--hidden-dim", type=int, default=64, help="Hidden dimension of the decision controller.")
     parser.add_argument("--use-init-hidden", action="store_true", help="Use evidence-driven initial hidden state for the controller.")
     parser.add_argument("--dataset", choices=sorted(TASKS.keys()), default="addition", help="Which neurosymbolic task to run.")
+    parser.add_argument(
+        "--inference-only",
+        action="store_true",
+        help="Measure single-sample inference time and exit.",
+    )
+    parser.add_argument(
+        "--inference-warmup",
+        type=int,
+        default=3,
+        help="Warmup runs before timing single-sample inference.",
+    )
+    parser.add_argument(
+        "--inference-repeats",
+        type=int,
+        default=20,
+        help="Number of timed repeats for single-sample inference.",
+    )
     return parser
 
 
@@ -282,6 +299,26 @@ def _infer_batch_size(batch) -> int:
     return 1
 
 
+def _slice_batch_to_one(batch):
+    if isinstance(batch, dict):
+        out = {}
+        for key, value in batch.items():
+            if torch.is_tensor(value) and value.dim() >= 1:
+                out[key] = value[:1]
+            else:
+                out[key] = value
+        return out
+    if isinstance(batch, (list, tuple)):
+        sliced = []
+        for value in batch:
+            if torch.is_tensor(value) and value.dim() >= 1:
+                sliced.append(value[:1])
+            else:
+                sliced.append(value)
+        return type(batch)(sliced)
+    return batch
+
+
 def main() -> None:
     parser = build_parser()
     base_args, _ = parser.parse_known_args()
@@ -302,10 +339,7 @@ def main() -> None:
     )
 
     task = TASKS[args.dataset]
-    if args.dataset == "cubs":
-        model = task.build_model(args, device, build_program=getattr(args, "cubs_run_baselines", False))
-    else:
-        model = task.build_model(args, device)
+    model = task.build_model(args, device)
     LOGGER.info("Model built: %s", model)
 
     loaders, eval_is_random = task.build_loaders(args)
@@ -314,16 +348,40 @@ def main() -> None:
         if eval_ids:
             (run_dir / "eval_ids.txt").write_text("\n".join(eval_ids), encoding="utf-8")
 
-    if args.dataset == "awa" and getattr(args, "awa_run_baselines", False):
-        baselines = task.run_baselines(model, loaders, device, args)
-        (run_dir / "awa_baselines.json").write_text(json.dumps(baselines, indent=2), encoding="utf-8")
-        LOGGER.info("AwA baselines: %s", baselines)
+    if args.inference_only:
+        model.eval()
+        loader = loaders.get("eval_sb", loaders["eval"])
+        batch = next(iter(loader))
+        batch = _slice_batch_to_one(batch)
+
+        with torch.no_grad():
+            for _ in range(max(args.inference_warmup, 0)):
+                task.step(model, batch, device)
+
+            use_cuda_timing = device.type == "cuda" and torch.cuda.is_available()
+            if use_cuda_timing:
+                torch.cuda.synchronize()
+
+            timings = []
+            for _ in range(max(args.inference_repeats, 1)):
+                start = time.perf_counter()
+                task.step(model, batch, device)
+                if use_cuda_timing:
+                    torch.cuda.synchronize()
+                timings.append(time.perf_counter() - start)
+
+        mean_s = sum(timings) / len(timings)
+        print(f"inference_time_single_ms_mean={mean_s * 1000.0:.6f}")
+        print(f"inference_time_single_ms_min={min(timings) * 1000.0:.6f}")
+        print(f"inference_time_single_ms_max={max(timings) * 1000.0:.6f}")
+        with (run_dir / "inference_time.csv").open("w", newline="", encoding="utf-8") as handle:
+            writer = csv.writer(handle)
+            writer.writerow(["metric", "value"])
+            writer.writerow(["inference_time_mean", f"{mean_s:.6f}"])
+            writer.writerow(["inference_time_min", f"{min(timings):.6f}"])
+            writer.writerow(["inference_time_max", f"{max(timings):.6f}"])
         return
-    if args.dataset == "cubs" and getattr(args, "cubs_run_baselines", False):
-        baselines = task.run_baselines(model, loaders, device, args)
-        (run_dir / "cubs_baselines.json").write_text(json.dumps(baselines, indent=2), encoding="utf-8")
-        LOGGER.info("CUBS baselines: %s", baselines)
-        return
+
     if args.dataset == "mnist_sudoku" and getattr(args, "mnist_sudoku_run_baselines", False):
         baselines = task.run_baselines(model, loaders, device, args)
         (run_dir / "mnist_sudoku_baselines.json").write_text(json.dumps(baselines, indent=2), encoding="utf-8")

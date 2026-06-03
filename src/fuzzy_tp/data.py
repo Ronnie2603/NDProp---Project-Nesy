@@ -6,6 +6,7 @@ import os
 import random
 import shutil
 import subprocess
+import sys
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
@@ -120,9 +121,14 @@ def resolve_clingo_command(explicit_path: Optional[str]) -> List[str]:
         return [resolved]
     resolved = shutil.which("clingo")
     if resolved is None:
-        raise FileNotFoundError(
-            "Could not locate 'clingo' on PATH. Install clingo or provide --clingo-path."
-        )
+        try:
+            __import__("clingo")
+        except ImportError as exc:
+            raise FileNotFoundError(
+                "Could not locate 'clingo' on PATH and the Python clingo module is not installed. "
+                "Install clingo or provide --clingo-path."
+            ) from exc
+        return [sys.executable, "-m", "clingo"]
     return [resolved]
 
 

@@ -317,6 +317,7 @@ def analyze_case(
     is_exact_match = predicted in stable_models and not has_undecided
     iter_max_diff: List[float] = []
     iter_exact_match: List[bool] = []
+    iter_stack_for_curves = None
     if iter_probs is not None and torch.is_tensor(iter_probs) and iter_probs.numel() > 0:
         if iter_probs.dim() == 1:
             iter_stack = iter_probs.unsqueeze(0)
@@ -328,6 +329,7 @@ def analyze_case(
         if selected_dims is not None and torch.is_tensor(selected_dims):
             atom_ptr_tensor = batched.atom_ptr.to(iter_stack.device)
             iter_stack = _project_iterates_with_selected_dims(iter_stack, atom_ptr_tensor, selected_dims.to(iter_stack.device))
+            iter_stack_for_curves = iter_stack
             tau_iter = debug_rollout.get("tau_iterates")
             phi_iter = debug_rollout.get("phi_iterates")
             if torch.is_tensor(tau_iter) and torch.is_tensor(phi_iter):
@@ -364,7 +366,8 @@ def analyze_case(
     is_supported_model, is_candidate_model, unsupported_atoms, violated_rules, support_witness = check_supported_model(
         program, predicted, clingo_cmd
     )
-    iter_curves = collect_iteration_curves(iter_probs if iter_probs is not None else [], start, end, program.atom_names) if iter_probs is not None else {}
+    curves_source = iter_stack_for_curves if iter_stack_for_curves is not None else iter_probs
+    iter_curves = collect_iteration_curves(curves_source if curves_source is not None else [], start, end, program.atom_names) if iter_probs is not None else {}
     if visualize and iter_curves:
         prob_lines = plot_atom_curves(iter_curves, case_dir, "Probabilities per atom", filename="probabilities_lines.png")
     if visualize and isinstance(debug_rollout, dict):
