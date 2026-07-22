@@ -16,7 +16,7 @@ except ImportError:  # pragma: no cover - optional dependency
     plt = None  # type: ignore
 
 from evaluate import instantiate_model, load_checkpoint, load_config
-from fuzzy_tp import (
+from ndprop import (
     collate_programs,
     format_answer_set,
     get_stable_models,
@@ -26,7 +26,7 @@ from fuzzy_tp import (
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Analyze decision-based GNN behaviour on curated cases.")
+    parser = argparse.ArgumentParser(description="Analyze NDProp behavior on curated ASP cases.")
     parser.add_argument("--run-dir", type=Path, required=True, help="Directory containing config.json and best.pt.")
     parser.add_argument(
         "--cases-dir",
@@ -126,6 +126,21 @@ def _has_undecidedness(tau: torch.Tensor, phi: torch.Tensor) -> bool:
     return bool((zero_tau & zero_phi).any().item())
 
 
+def _candidate_matches(
+    values: torch.Tensor,
+    atom_names: Sequence[str],
+    stable_models: Sequence[Sequence[str]],
+    threshold: float,
+    tau: Optional[torch.Tensor] = None,
+    phi: Optional[torch.Tensor] = None,
+) -> Tuple[bool, List[str], bool]:
+    predicted = sorted(format_answer_set(atom_names, values, threshold=threshold))
+    has_undecided = False
+    if tau is not None and phi is not None:
+        has_undecided = _has_undecidedness(tau, phi)
+    return predicted in stable_models and not has_undecided, predicted, has_undecided
+
+
 def run_model(model, batched):
     outputs = model(
         batched.p0,
@@ -135,7 +150,6 @@ def run_model(model, batched):
         int(batched.num_atoms.item()),
         int(batched.num_rules.item()),
         atom_ptr=batched.atom_ptr,
-        rule_ptr=batched.rule_ptr,
         fact_mask=batched.fact_mask,
         fact_values=batched.fact_values,
         return_debug=True,
@@ -318,6 +332,8 @@ def analyze_case(
     iter_max_diff: List[float] = []
     iter_exact_match: List[bool] = []
     iter_stack_for_curves = None
+    tau_iter = None
+    phi_iter = None
     if iter_probs is not None and torch.is_tensor(iter_probs) and iter_probs.numel() > 0:
         if iter_probs.dim() == 1:
             iter_stack = iter_probs.unsqueeze(0)
@@ -371,14 +387,22 @@ def analyze_case(
     if visualize and iter_curves:
         prob_lines = plot_atom_curves(iter_curves, case_dir, "Probabilities per atom", filename="probabilities_lines.png")
     if visualize and isinstance(debug_rollout, dict):
-        tau_iter = debug_rollout.get("tau_iterates")
-        phi_iter = debug_rollout.get("phi_iterates")
-        if tau_iter is not None and torch.is_tensor(tau_iter) and tau_iter.numel() > 0:
-            tau_curves = collect_iteration_curves(tau_iter, start, end, program.atom_names)
+        tau_curves_source = tau_iter if "tau_iter" in locals() and tau_iter is not None else debug_rollout.get("tau_iterates")
+        phi_curves_source = phi_iter if "phi_iter" in locals() and phi_iter is not None else debug_rollout.get("phi_iterates")
+        if tau_curves_source is not None and torch.is_tensor(tau_curves_source) and tau_curves_source.numel() > 0:
+            tau_curves = collect_iteration_curves(tau_curves_source, start, end, program.atom_names)
             tau_lines = plot_atom_curves(tau_curves, case_dir, "Tau per atom", filename="tau_lines.png")
-        if phi_iter is not None and torch.is_tensor(phi_iter) and phi_iter.numel() > 0:
-            phi_curves = collect_iteration_curves(phi_iter, start, end, program.atom_names)
+        if phi_curves_source is not None and torch.is_tensor(phi_curves_source) and phi_curves_source.numel() > 0:
+            phi_curves = collect_iteration_curves(phi_curves_source, start, end, program.atom_names)
             phi_lines = plot_atom_curves(phi_curves, case_dir, "Phi per atom", filename="phi_lines.png")
+    selected_dimensions = []
+    if isinstance(debug_rollout, dict):
+        selected_dims_report = debug_rollout.get("selected_dimensions")
+        if torch.is_tensor(selected_dims_report):
+            selected_dimensions = [int(dim) for dim in selected_dims_report.detach().cpu().tolist()]
+
+    any_iter_selected_dim_exact = bool(any(iter_exact_match))
+    final_iter_selected_dim_exact = bool(iter_exact_match[-1]) if iter_exact_match else bool(is_exact_match)
 
     report = {
         "case": program_path.name,
@@ -394,13 +418,15 @@ def analyze_case(
         "violated_rules": violated_rules,
         "support_witness": support_witness,
         "iter_exact_match": iter_exact_match,
+        "any_iter_selected_dim_exact": any_iter_selected_dim_exact,
+        "final_iter_selected_dim_exact": final_iter_selected_dim_exact,
         "prob_plot": str(prob_plot) if prob_plot else None,
         "prob_line_plot": str(prob_lines) if prob_lines else None,
         "tau_plot": str(tau_lines) if tau_lines else None,
         "phi_plot": str(phi_lines) if phi_lines else None,
         "output_dir": str(case_dir),
         "debug_keys": sorted(list(debug_rollout.keys())) if isinstance(debug_rollout, dict) else [],
-        "selected_dimensions": [],
+        "selected_dimensions": selected_dimensions,
         "iteration_curves": iter_curves,
     }
 
@@ -416,8 +442,6 @@ def main() -> None:
     checkpoint = load_checkpoint(args.run_dir, device)
 
     model = instantiate_model(config, device)
-    if args.model_iters is not None and args.model_iters > 0:
-        model.num_iters = args.model_iters
     if args.model_iters is not None and args.model_iters > 0:
         model.num_iters = args.model_iters
     model.load_state_dict(checkpoint["model_state"])
@@ -463,7 +487,16 @@ def main() -> None:
 
     manifest_path = analysis_root / "manifest.json"
     with open(manifest_path, "w", encoding="utf-8") as handle:
-        json.dump({"cases": manifest, "threshold": args.threshold}, handle, indent=2)
+        json.dump(
+            {
+                "cases": manifest,
+                "threshold": args.threshold,
+                "model_iters": int(model.num_iters),
+                "config_model_iters": config.get("model_iters"),
+            },
+            handle,
+            indent=2,
+        )
 
     eval_summary = {
         report["case"]: bool(report["is_exact_match"]) for report in manifest

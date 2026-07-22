@@ -37,53 +37,18 @@ def _prototype_rules(lines: list[str], base: int) -> None:
             bads += 1
 
 
-def _row_bad(lines: list[str], side: int) -> None:
-    for r in range(1, side + 1):
-        for v in range(1, side + 1):
-            for c1 in range(1, side + 1):
-                for c2 in range(c1 + 1, side + 1):
-                    lines.append(f"bad :- digit({r},{c1},{v}), digit({r},{c2},{v}), not bad.")
-
-
-def _col_bad(lines: list[str], side: int) -> None:
-    for c in range(1, side + 1):
-        for v in range(1, side + 1):
-            for r1 in range(1, side + 1):
-                for r2 in range(r1 + 1, side + 1):
-                    lines.append(f"bad :- digit({r1},{c},{v}), digit({r2},{c},{v}), not bad.")
-
-
-def _block_bad(lines: list[str], base: int) -> None:
-    side = base * base
-    for br in range(0, base):
-        for bc in range(0, base):
-            cells = [(br * base + r, bc * base + c) for r in range(1, base + 1) for c in range(1, base + 1)]
-            for v in range(1, side + 1):
-                for i in range(len(cells)):
-                    r1, c1 = cells[i]
-                    for j in range(i + 1, len(cells)):
-                        r2, c2 = cells[j]
-                        lines.append(f"bad :- digit({r1},{c1},{v}), digit({r2},{c2},{v}), not bad.")
-
-
 def generate(program_path: Path, *, base: int) -> None:
     side = base * base
     lines: list[str] = []
     lines.append(f"% MNIST Sudoku rules (normal rules only) for {side}x{side}")
     lines.append("")
     _prototype_rules(lines, base)
-    # lines.append("")
-    # _row_bad(lines, side)
-    # lines.append("")
-    # _col_bad(lines, side)
-    # lines.append("")
-    # _block_bad(lines, base)
     program_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--base", type=int, default=3, help="Base size (2 for 4x4, 3 for 9x9).")
+    parser.add_argument("--base", type=int, default=2, help="Base size (default: 2 for 4x4).")
     parser.add_argument("--out", type=Path, default=None, help="Output program path.")
     args = parser.parse_args()
 

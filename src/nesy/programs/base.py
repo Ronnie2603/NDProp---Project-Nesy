@@ -7,7 +7,7 @@ from collections import OrderedDict
 
 import torch
 
-from fuzzy_tp import ProgramGraph, ground_program_to_aspif, load_program_from_aspif, resolve_clingo_command
+from ndprop import ProgramGraph, ground_program_to_aspif, load_program_from_aspif, resolve_clingo_command
 
 
 @dataclass(frozen=True)
@@ -280,7 +280,7 @@ def _load_program_graph(program_path: Path, clingo_path: Optional[str]) -> Progr
     clingo_cmd = resolve_clingo_command(clingo_path)
     suffix = program_path.suffix.lower()
     if suffix == ".aspif":
-        return load_program_from_aspif(str(program_path), clingo_cmd, atom_list=[], compute_stable_models=False)
+        return load_program_from_aspif(str(program_path), clingo_cmd, compute_stable_models=False)
     return ground_program_to_aspif(str(program_path), clingo_cmd)
 
 

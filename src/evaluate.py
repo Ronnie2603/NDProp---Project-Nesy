@@ -7,8 +7,8 @@ from typing import Optional
 
 import torch
 
-from fuzzy_tp import (
-    DecisionBasedGNN,
+from ndprop import (
+    NDProp,
     collate_programs,
     format_answer_set,
     load_program_from_file,
@@ -35,7 +35,7 @@ def load_checkpoint(run_dir: Path, device: torch.device) -> dict:
 
 
 def instantiate_model(config: dict, device: torch.device):
-    model = DecisionBasedGNN(
+    model = NDProp(
         num_iters=config.get("model_iters", 50),
         tnorm=config.get("tnorm", "product"),
         tnorm_wfs=config.get("tnorm_wfs"),
@@ -43,6 +43,7 @@ def instantiate_model(config: dict, device: torch.device):
         logical_dimension=config.get("logical_dimension", config.get("logical_dim", 1)),
         use_convergence=not config.get("disable_convergence", False),
         convergence_tol=config.get("convergence_tol", 1e-4),
+        decision_normalization=config.get("decision_normalization", "none"),
     )
     model_config = {
         "num_iters": config.get("model_iters", 50),
@@ -52,6 +53,7 @@ def instantiate_model(config: dict, device: torch.device):
         "logical_dimension": config.get("logical_dimension", config.get("logical_dim", 1)),
         "use_convergence": not config.get("disable_convergence", False),
         "convergence_tol": config.get("convergence_tol", 1e-4),
+        "decision_normalization": config.get("decision_normalization", "none"),
     }
     print(json.dumps(model_config, indent=2))
     return model.to(device)
@@ -100,10 +102,8 @@ def evaluate_program(
             int(batched.num_atoms.item()),
             int(batched.num_rules.item()),
             atom_ptr=batched.atom_ptr,
-            rule_ptr=batched.rule_ptr,
             fact_mask=batched.fact_mask,
             fact_values=batched.fact_values,
-            founded_mask=getattr(batched, "founded_mask", None),
         ).cpu()
 
     atom_ptr = batched.atom_ptr.tolist()
@@ -185,7 +185,7 @@ def evaluate_program(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Evaluate a trained fuzzy TP model on an ASP file.")
+    parser = argparse.ArgumentParser(description="Evaluate a trained NDProp model on an ASP program.")
     parser.add_argument("--run-dir", required=True, help="Path to the training run directory containing best.pt")
     parser.add_argument("--file", required=True, help="Path to the ASP program file to evaluate")
     parser.add_argument("--device", default="cpu", help="Device to run evaluation on")

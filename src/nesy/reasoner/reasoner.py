@@ -5,7 +5,7 @@ from typing import Dict, Optional
 import torch
 import torch.nn as nn
 
-from fuzzy_tp import DecisionBasedGNN
+from ndprop import NDProp
 
 from nesy.programs.base import BatchProgram, ProgramSpec, QueryProgramSpec
 
@@ -16,7 +16,7 @@ class NeSyReasoner(nn.Module):
     and evaluates it with the differentiable stable model approximator.
     """
 
-    def __init__(self, program: ProgramSpec, model: DecisionBasedGNN, *, init_hidden: bool = False) -> None:
+    def __init__(self, program: ProgramSpec, model: NDProp, *, init_hidden: bool = False) -> None:
         super().__init__()
         self.program = program
         self.model = model
@@ -30,7 +30,6 @@ class NeSyReasoner(nn.Module):
             if hidden_dim is not None and hidden_dim > 0 and total_inputs > 0:
                 self.hidden_gen = nn.Sequential(
                     nn.Linear(total_inputs, hidden_dim * program.num_atoms * logical_dim),
-                    nn.LayerNorm(hidden_dim * program.num_atoms * logical_dim),
                     nn.Tanh()
                 )
 
@@ -90,10 +89,8 @@ class NeSyReasoner(nn.Module):
             batch_graph.num_atoms,
             batch_graph.num_rules,
             atom_ptr=batch_graph.atom_ptr,
-            rule_ptr=batch_graph.rule_ptr,
             fact_mask=batch_graph.fact_mask,
             fact_values=batch_graph.fact_values,
-            founded_mask=batch_graph.founded_mask,
             return_iterates=return_iterates,
             return_debug=need_debug,
             initial_hidden=initial_hidden,

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 import random
 from pathlib import Path
 from typing import Dict
@@ -7,6 +8,8 @@ from typing import Dict
 import torch
 from torch.utils.data import Dataset
 from torchvision import datasets, transforms
+
+LOGGER = logging.getLogger(__name__)
 
 
 def default_transform() -> transforms.Compose:
@@ -19,7 +22,7 @@ def move_batch(batch: Dict, device: torch.device) -> Dict:
 
 def use_random_eval(eval_pairs: Path | None, train_pairs: Path | None) -> bool:
     if eval_pairs is None or not eval_pairs.exists():
-        print("Using random evaluation pairs.")
+        LOGGER.info("Using random evaluation pairs.")
         return True
     if train_pairs is None or not train_pairs.exists():
         return False
@@ -58,7 +61,6 @@ class RandomDigitTupleDataset(Dataset):
         self.query_digits = None
         if self.label_mode in ("member3", "member5"):
             self.query_digits = [self.rng.randrange(0, 10) for _ in range(size)]
-            
 
     def __len__(self) -> int:
         return self.size

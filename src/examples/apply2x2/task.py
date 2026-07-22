@@ -8,7 +8,7 @@ import torch
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
-from examples.common import NeSyTask, gnn_from_args, move_batch, use_random_eval
+from examples.common import NeSyTask, gnn_from_args, move_batch
 from nesy.reasoner import NeSyReasoner
 
 from .datasets import Apply2x2Dataset, apply2x2_collate, generate_apply2x2_pairs
@@ -121,7 +121,6 @@ class Apply2x2Task(NeSyTask):
         target = batch["sums"]
         target_cpu = target.detach().cpu().long()
         if (target_cpu < MIN_RESULT).any() or (target_cpu > MAX_RESULT).any():
-            print(batch)
             raise ValueError("Found target value outside apply2x2 result bounds.")
         row_lookup = model.row_lookup.cpu()
         col_lookup = model.col_lookup.cpu()

@@ -8,9 +8,9 @@ import torch
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
-from tqdm import tqdm
 
 from examples.common import NeSyTask, gnn_from_args, move_batch
+from generate_mnist_sudoku import ensure_dataset
 from nesy.reasoner import NeSyReasoner
 
 from .datasets import MNISTSudokuDataset, mnist_sudoku_collate
@@ -20,7 +20,7 @@ from .program import build_program
 
 class MNISTSudokuTask(NeSyTask):
     name = "mnist_sudoku"
-    description = "MNIST Sudoku with digit CNN feeding DecisionBasedGNN."
+    description = "MNIST Sudoku with digit CNN feeding NDProp."
 
     def _build_digit_transform(self, dataset: str):
         if dataset == "mnist":
@@ -192,10 +192,13 @@ class MNISTSudokuTask(NeSyTask):
         parser.add_argument("--program-path", type=Path, default=None, help="Path to ASP program (lp/aspif).")
         parser.add_argument("--clingo-path", type=str, default=None, help="Optional clingo executable.")
 
-
     def build_model(self, args: argparse.Namespace, device: torch.device) -> torch.nn.Module:
+        ensure_dataset(
+            out_dir=args.mnist_sudoku_root,
+            mnist_root=args.mnist_root,
+            image_dataset=args.mnist_sudoku_image_dataset,
+        )
         program = build_program(args.program_path, args.clingo_path)
-        # args.fixed_atom_num = program.num_atoms
         gnn = gnn_from_args(args)
         reasoner = NeSyReasoner(program, gnn, init_hidden=args.use_init_hidden)
         num_vals = int(program.index_map["digit"].size(1))

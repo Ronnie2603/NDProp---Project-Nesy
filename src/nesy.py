@@ -8,10 +8,9 @@ import math
 import random
 import time
 from pathlib import Path
-from typing import Dict, Iterable, List, Tuple
+from typing import Dict, List, Tuple
 
 import torch
-import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 
@@ -208,8 +207,7 @@ def _extract_eval_ids(dataset) -> List[str]:
             else:
                 raise ValueError("Unsupported dataset type for extracting eval ids.")
     except Exception:
-        print("Failed to extract eval ids.")
-        pass
+        LOGGER.warning("Failed to extract eval ids.", exc_info=True)
     return ids
 
 
@@ -223,18 +221,29 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--log-interval", type=int, default=100, help="Mini-batch interval for logging training stats.")
     parser.add_argument("--num-workers", type=int, default=0, help="Number of DataLoader worker processes.")
     parser.add_argument("--log-root", type=Path, default=None, help="Directory where run logs and metrics are stored.")
-    parser.add_argument("--tnorm", choices=["product", "lukasiewicz", "godel"], default="godel", help="T-norm for TP aggregation.")
+    parser.add_argument(
+        "--tnorm",
+        choices=["product", "lukasiewicz", "godel"],
+        default="godel",
+        help="T-norm used to aggregate rule bodies.",
+    )
     parser.add_argument(
         "--tnorm-wfs",
         choices=["product", "lukasiewicz", "godel"],
         default=None,
         help="Optional t-norm used during WFS-style precomputation (defaults to --tnorm).",
     )
-    parser.add_argument("--iters", type=int, default=30, help="Maximum number of TP iterations.")
+    parser.add_argument("--iters", type=int, default=30, help="Maximum number of NDProp iterations.")
     parser.add_argument("--convergence-tol", type=float, default=1e-4, help="Tolerance for convergence detection.")
     parser.add_argument("--disable-convergence", action="store_true", help="Disable early stopping based on convergence.")
     parser.add_argument("--logical-dimension", type=int, default=1, help="Logical feature channels per atom.")
     parser.add_argument("--hidden-dim", type=int, default=64, help="Hidden dimension of the decision controller.")
+    parser.add_argument(
+        "--decision-normalization",
+        choices=["none", "program"],
+        default="none",
+        help="Normalize decision logits per program and logical dimension, or disable it.",
+    )
     parser.add_argument("--use-init-hidden", action="store_true", help="Use evidence-driven initial hidden state for the controller.")
     parser.add_argument("--dataset", choices=sorted(TASKS.keys()), default="addition", help="Which neurosymbolic task to run.")
     parser.add_argument(

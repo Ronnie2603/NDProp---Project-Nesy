@@ -87,7 +87,6 @@ class MNISTSudokuNeSyModel(nn.Module):
             output_dim = hidden_dim * self.reasoner.program.num_atoms * logical_dim
             self.hidden_gen = nn.Sequential(
                 nn.Linear(input_dim, output_dim),
-                # nn.LayerNorm(output_dim),
                 nn.ReLU(),
             )
 
@@ -129,12 +128,9 @@ class MNISTSudokuNeSyModel(nn.Module):
             probs_full = torch.cat([pad, probs_full], dim=-1)
         elif probs_full.size(-1) > self.expected_classes:
             probs_full = probs_full[:, :, : self.expected_classes]
-        blank_mask = torch.argmax(probs, dim=-1) == 0
-        digit_evidence = probs[:, 1 : 1 + num_vals]
-        digit_evidence[blank_mask] = 0.0
-        digit_evidence = digit_evidence.view(batch_size, cells, num_vals)
-
-        evidence = {"digit": digit_evidence.reshape(batch_size, -1)}
+        # Visual Sudoku uses CNN outputs to initialize the decision controller,
+        # not as fuzzy digit facts injected into tau/phi.
+        evidence = {"digit": probs.new_zeros(batch_size, cells * num_vals)}
         initial_hidden = None
         if self.hidden_gen is not None:
             concat = probs_full.reshape(batch_size, -1)

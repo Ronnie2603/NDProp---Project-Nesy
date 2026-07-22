@@ -1,7 +1,28 @@
-data/*
-pre/*
-runs/*
-runs_nesy/*
-**/__pycache__/**
-weights/*
-baselines/*
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Generated and downloaded data
+data/
+benchmarks/
+
+# Experiment outputs
+runs/
+runs_nesy/
+baselines/
+pre/
+
+# Local checkpoints and pretrained weights
+weights/
+*.pt
+*.pth
+*.ckpt
+
+# Logs and local machine files
+*.log
+.DS_Store

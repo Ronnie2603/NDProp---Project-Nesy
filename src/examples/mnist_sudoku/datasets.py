@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Sequence, Tuple, Callable
+from typing import Callable, Sequence
 
 import torch
 from torch.utils.data import Dataset

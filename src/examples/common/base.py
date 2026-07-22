@@ -8,7 +8,7 @@ from typing import Dict, Tuple
 import torch
 from torch.utils.data import DataLoader
 
-from fuzzy_tp import DecisionBasedGNN
+from ndprop import NDProp
 
 
 class NeSyTask(ABC):
@@ -38,8 +38,8 @@ class NeSyTask(ABC):
         return
 
 
-def gnn_from_args(args: argparse.Namespace) -> DecisionBasedGNN:
-    return DecisionBasedGNN(
+def gnn_from_args(args: argparse.Namespace) -> NDProp:
+    return NDProp(
         num_iters=args.iters,
         tnorm=args.tnorm,
         tnorm_wfs=getattr(args, "tnorm_wfs", None),
@@ -47,5 +47,5 @@ def gnn_from_args(args: argparse.Namespace) -> DecisionBasedGNN:
         logical_dimension=args.logical_dimension,
         use_convergence=not args.disable_convergence,
         convergence_tol=args.convergence_tol,
-        fixed_atom_num=getattr(args, "fixed_atom_num", None),
+        decision_normalization=getattr(args, "decision_normalization", "none"),
     )

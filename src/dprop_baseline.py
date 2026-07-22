@@ -8,8 +8,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Sequence, Tuple
 
-from fuzzy_tp import get_stable_models, resolve_clingo_command
-from fuzzy_tp.data import parse_program_text
+from ndprop import get_stable_models, resolve_clingo_command
+from ndprop.data import parse_program_text
 
 
 def parse_args() -> argparse.Namespace:

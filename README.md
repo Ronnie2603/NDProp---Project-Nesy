@@ -1,16 +1,19 @@
 # NDProp: Neural Decision-Propagation for Answer Set Programming
 
-This repository contains the public release code for the IJCAI-ECAI 2026 paper
-**Neural Decision-Propagation for Answer Set Programming**.
+This repository contains the implementation for the paper **Neural
+Decision-Propagation for Answer Set Programming**. It includes the source code,
+ASP programs, and shell scripts used to run the paper experiments.
 
-The repo covers the following experiments from the paper:
+The release covers three experiment families:
 
-1. Random ASP solving on N2L and 3-LP programs.
-2. Neuro-symbolic MNIST reasoning on `addition`, `addition2`, `add2x2`,
-   `apply2x2`, `member3`, and `member5`.
-3. Visual 4x4 Sudoku with incomplete or imperfect digit predictions.
+- Random ASP solving on Negative Two Literal (N2L) and 3-LP programs
+- Neuro-symbolic tasks including MNIST Addition (one and two digits), Add 2x2,
+  Apply 2x2, and Membership (three and five numbers)
+- Visual 4x4 Sudoku with learned digit recognition CNNs
 
 ## Setup
+
+Python 3.12 is the tested interpreter version.
 
 ```bash
 python -m venv .venv
@@ -18,132 +21,172 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Install `clingo` on `PATH`, or pass `--clingo-path` to scripts that expose it.
+The `clingo` Python package is sufficient for the default setup. You can also
+install a standalone `clingo` executable on `PATH`, or pass `--clingo-path` to
+scripts that expose that option.
 
-PyTorch Geometric wheels depend on your PyTorch and CUDA versions. If
-`pip install -r requirements.txt` cannot resolve `torch-geometric` or
-`torch-scatter`, install the matching wheels from the official PyTorch
-Geometric instructions.
+## Data and Assets
 
-## Data Preparation
+Tracked release inputs:
 
-Generated and downloaded data live under `data/` by default. Run outputs live
-under `runs/`, `runs_nesy/`, and `baselines/`. These paths are ignored by git.
+- `analysis_cases/`: small ASP test programs for analysis.
+- `indexes/`: reproducible splits for neuro-symbolic tasks.
+- `assets/operator_images/hasy/`: small operator-image asset for `apply2x2`;
+  see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for attribution and licensing.
+- `src/examples/**/programs/`: ASP and ASPIF programs for each task.
 
-### MNIST Reasoning Indexes
-
-The tracked files in `indexes/` provide reproducible splits for the MNIST
-reasoning tasks. Regenerate them with:
+Regeneration commands:
 
 ```bash
 python src/generate_indexes.py --mnist --indexes-root indexes --mnist-root data
+python src/generate_mnist_sudoku.py --out-dir data/mnist_sudoku --mnist-root data --train-count 10000 --test-count 1000
 ```
 
-### Visual Sudoku Tensors
+## Experiment Scripts
 
-Generate the MNIST Sudoku tensors used by the visual Sudoku experiment:
+Each experiment family has one public entrypoint:
+
+- `scripts/random_asp/main.sh`
+- `scripts/neuro_symbolic_tasks/main.sh`
+- `scripts/visual_sudoku/main.sh`
+
+Use the main scripts rather than invoking their helpers directly. Each main
+script lists its commands, and every command has focused help:
 
 ```bash
-python src/generate_mnist_sudoku.py \
-  --output-root data/mnist_sudoku \
-  --mnist-root data \
-  --train-size 10000 \
-  --test-size 1000 \
-  --clue-fraction 0.5
+bash scripts/random_asp/main.sh --help
+bash scripts/random_asp/main.sh train --help
+bash scripts/neuro_symbolic_tasks/main.sh task --help
+bash scripts/visual_sudoku/main.sh generate --help
 ```
 
-The generator writes `train_features_img.pt`, `train_labels.pt`,
-`test_features_img.pt`, and `test_labels.pt`. Blank cells are rendered with
-MNIST zero images; nonblank cells use MNIST digits `1` through `4`.
+The top-level help shows the normal experiment controls. Command-specific help
+also documents path overrides, model settings, and multi-device controls.
+Helper scripts remain available for automation, but they are implementation
+details of these entrypoints.
 
-## Experiments
-
-### 1. Random ASP Solving
+### Random ASP
 
 Generate benchmark splits:
 
 ```bash
-python src/generate_random_asp.py --family n2l
-python src/generate_random_asp.py --family 3lp
+bash scripts/random_asp/main.sh generate --family n2l
+bash scripts/random_asp/main.sh generate --family 3lp
 ```
+
+This creates repo-local `benchmarks/n2l` or `benchmarks/3lp` directories with
+`train_easy|medium|hard`, `val_easy|medium|hard`, and `test_easy|medium|hard`
+splits.
+
+| Difficulty | Atom range | Training | Validation | Test |
+| --- | --- | ---: | ---: | ---: |
+| Easy | 5-10 | 1000 | 100 | 100 |
+| Medium | 11-50 | 1000 | 100 | 100 |
+| Hard | 51-100 | 1000 | 100 | 100 |
+
+Existing complete splits are reused.
 
 Train NDProp:
 
 ```bash
-scripts/run_random_asp_experiments.sh --family n2l --device cuda:0
-scripts/run_random_asp_experiments.sh --family 3lp --device cuda:0
+bash scripts/random_asp/main.sh train --family n2l --difficulty medium --device cuda:0
+bash scripts/random_asp/main.sh train --family 3lp --difficulty medium --device cuda:0
 ```
 
-Run the RDProp restart baselines used for Table 2:
+The training defaults follow the paper setup: 1000 epochs, 10 training
+iterations, hidden dimension 32, logical dimension 32, learning rate `1e-3`,
+Godel t-norm, and validation on `val_<difficulty>`.
+
+Run the full random ASP pipeline for both families and difficulties:
 
 ```bash
-scripts/run_random_asp_rdprop_baseline.sh --family n2l --restarts 1 10 100
-scripts/run_random_asp_rdprop_baseline.sh --family 3lp --restarts 1 10 100
+bash scripts/random_asp/main.sh all --device cuda:0
 ```
 
-Analyze a trained run by difficulty split:
+The `all` command verifies/generates repo-local benchmarks, trains NDProp, runs
+difficulty and iteration analysis, runs the random and RDProp baselines, and
+writes the grouped method-comparison plots. By default it runs both N2L and
+3-LP, training NDProp on both `easy` and `medium` training splits.
+
+Run baselines and analysis:
 
 ```bash
-scripts/analyze_random_asp_results.sh \
-  --family n2l \
-  --run-dir runs/random_asp/n2l/<run_dir>
+bash scripts/random_asp/main.sh baseline --family n2l --restarts 1 10 100
+bash scripts/random_asp/main.sh analyze --family n2l --run-dir runs/random_asp/n2l/medium/<run_dir>
+bash scripts/random_asp/main.sh iteration --family n2l --run-dir runs/random_asp/n2l/medium/<run_dir>
 ```
 
-### 2. Neuro-Symbolic MNIST Reasoning
-
-Run one task:
+#### Analyze the bundled ASP cases with an existing random ASP run
 
 ```bash
-scripts/run_mnist_task.sh \
-  --dataset addition \
-  --device cpu \
-  --epochs 1 \
-  --train-limit 32 \
-  --eval-limit 16
+bash scripts/random_asp/main.sh analysis-cases --run-dir <run_dir> --device cuda:0
 ```
 
-Run the six-tasks:
+### Neuro-Symbolic Tasks
+
+Run one small task:
 
 ```bash
-scripts/run_mnist_reasoning_experiments.sh
+bash scripts/neuro_symbolic_tasks/main.sh task --dataset addition --device cuda:0 --epochs 1 --train-limit 32 --eval-limit 16
 ```
 
-Summarize the results for the six-tasks:
+Run and summarize all six neuro-symbolic tasks:
 
 ```bash
-scripts/summarize_mnist_reasoning_results.sh
+bash scripts/neuro_symbolic_tasks/main.sh run
+bash scripts/neuro_symbolic_tasks/main.sh summarize
 ```
 
-### 3. Visual Sudoku
+`scripts/neuro_symbolic_tasks/main.sh all` runs the six tasks and then summarizes
+them. `summarize` rebuilds `results.csv` from the newest `run_*` directory in
+each task/seed/repeat directory, so stale rows from older runs are excluded.
+Task-specific dataset files, ASP programs, and model defaults are selected
+automatically. Use `task --help` only when an experiment needs an explicit
+override.
 
-Run the visual Sudoku task over digit-label fractions:
+### Visual Sudoku
+
+Run the complete pipeline with:
 
 ```bash
-scripts/run_visual_sudoku_experiments.sh
+bash scripts/visual_sudoku/main.sh
 ```
 
-## Analysis Utilities
+The command checks `data/mnist_sudoku` before building the model. If any
+required tensor is missing, it downloads the selected image dataset as needed
+and generates the complete 4x4 Visual Sudoku dataset automatically. The
+individual `pretrain`, `train`, and `baseline` commands perform the same check.
+Use the explicit `generate` command when you want custom generation settings
+or forced regeneration.
 
-Run the ASP analysis cases:
+The default run is expensive: it trains five label fractions over three seeds.
+Use flags to select a smaller experiment grid or assign a device. For example:
 
 ```bash
-scripts/analyze_asp_cases.sh --cases-dir analysis_cases
+bash scripts/visual_sudoku/main.sh all --pcts 1.0 --seeds 1 --device cuda:0
 ```
 
-Measure random ASP iteration scaling, if needed:
+This experiment writes digit checkpoints under `weights/` and run outputs under
+`runs_nesy/visual_sudoku`. The full pipeline finishes by aggregating NDProp,
+Clingo, and neural-baseline cell/grid accuracy across seeds, with shaded ±1
+sample-standard-deviation bands. Rebuild only the analysis artifacts with:
 
 ```bash
-scripts/analyze_random_asp_iteration_scaling.sh --family n2l
+bash scripts/visual_sudoku/main.sh analysis
 ```
 
 ## Repository Layout
 
 ```text
-analysis_cases/        Curated ASP programs for analysis and baselines.
-indexes/               Tracked MNIST reasoning split files.
-scripts/               Shell entrypoints for paper experiments.
-src/                   Python source code and data generators.
-src/examples/          Paper task implementations.
-src/fuzzy_tp/          ASP parsing, graph construction, and propagation code.
-src/nesy/              Shared neuro-symbolic runner components.
+analysis_cases/                Curated ASP programs for analysis.
+assets/                        Small bundled assets needed by released tasks.
+indexes/                       Tracked experiment split files.
+scripts/random_asp/            Random ASP main script and helpers.
+scripts/neuro_symbolic_tasks/  Neuro-symbolic task entrypoint, runner, and defaults.
+scripts/visual_sudoku/         Visual Sudoku main script.
+src/                           Python source code and data generators.
+src/examples/                  Paper task implementations.
+src/ndprop/                    ASP parsing, graph construction, and NDProp model.
+src/nesy/                      Shared neuro-symbolic runner components.
+src/experiment_utils/          CSV aggregation and plotting helpers.
 ```

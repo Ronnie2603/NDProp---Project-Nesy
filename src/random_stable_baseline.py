@@ -1,55 +1,27 @@
+from __future__ import annotations
+
 import argparse
 import json
 import random
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Sequence, Tuple
+from typing import Dict, List, Sequence
 
-from fuzzy_tp import get_stable_models, resolve_clingo_command
-from fuzzy_tp.data import parse_program_text
+from ndprop import get_stable_models, resolve_clingo_command
+from ndprop.data import parse_program_text
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Random baseline: sample atom sets and check if they are stable models."
     )
-    parser.add_argument(
-        "--cases-dir",
-        type=Path,
-        required=True,
-        help="Directory containing .lp programs to evaluate.",
-    )
-    parser.add_argument(
-        "--samples",
-        type=int,
-        default=100,
-        help="Number of random candidate sets sampled per program.",
-    )
-    parser.add_argument(
-        "--include-prob",
-        type=float,
-        default=0.5,
-        help="Probability of including each atom in a random candidate set.",
-    )
+    parser.add_argument("--cases-dir", type=Path, required=True, help="Directory containing .lp programs.")
+    parser.add_argument("--samples", type=int, default=100, help="Random candidate sets sampled per program.")
+    parser.add_argument("--include-prob", type=float, default=0.5, help="Probability of including each atom.")
     parser.add_argument("--seed", type=int, default=7, help="Random seed.")
-    parser.add_argument(
-        "--clingo-path",
-        type=str,
-        default=None,
-        help="Optional path to clingo executable. Falls back to PATH lookup.",
-    )
-    parser.add_argument(
-        "--output-dir",
-        type=Path,
-        default=None,
-        help="Output directory for reports (defaults to baselines/<timestamp>).",
-    )
-    parser.add_argument(
-        "--timestamp",
-        type=str,
-        default=None,
-        help="Optional timestamp override to reuse an output directory.",
-    )
+    parser.add_argument("--clingo-path", type=str, default=None, help="Optional clingo executable.")
+    parser.add_argument("--output-dir", type=Path, default=None, help="Output directory.")
+    parser.add_argument("--timestamp", type=str, default=None, help="Optional timestamp.")
     return parser.parse_args()
 
 
@@ -123,8 +95,7 @@ def main() -> None:
         manifest.append(report)
         eval_summary[case_path.name] = bool(report["success"])
 
-    manifest_path = output_dir / "manifest.json"
-    with manifest_path.open("w", encoding="utf-8") as handle:
+    with (output_dir / "manifest.json").open("w", encoding="utf-8") as handle:
         json.dump(
             {
                 "cases": manifest,
@@ -136,8 +107,7 @@ def main() -> None:
             indent=2,
         )
 
-    eval_path = output_dir / "eval.json"
-    with eval_path.open("w", encoding="utf-8") as handle:
+    with (output_dir / "eval.json").open("w", encoding="utf-8") as handle:
         json.dump(eval_summary, handle, indent=2)
 
     successes = sum(1 for value in eval_summary.values() if value)
@@ -149,8 +119,7 @@ def main() -> None:
         "accuracy": accuracy,
         "output_dir": str(output_dir.resolve()),
     }
-    summary_path = output_dir / "summary.json"
-    with summary_path.open("w", encoding="utf-8") as handle:
+    with (output_dir / "summary.json").open("w", encoding="utf-8") as handle:
         json.dump(summary, handle, indent=2)
 
     print(f"Random baseline results stored in {output_dir}")
