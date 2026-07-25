@@ -12,9 +12,7 @@ DATASET="addition"
 DEVICE="${DEVICE:-cuda:2}"
 BATCH_SIZE=""
 EPOCHS=10
-LR=1e-3
 ITERS=2
-LOGICAL_DIM=1
 SEED=2
 MNIST_ROOT="${PROJECT_ROOT}/data"
 LOG_INTERVAL=100
@@ -34,7 +32,6 @@ INFERENCE_ONLY=false
 INFERENCE_WARMUP=""
 INFERENCE_REPEATS=""
 EPOCHS_SET=false
-LR_SET=false
 ITERS_SET=false
 EXTRA_ARGS=()
 
@@ -49,9 +46,7 @@ Task and training:
   -d, --device DEVICE        Compute device (default: ${DEVICE})
   -b, --batch-size N         Batch size (default: task-specific)
   -e, --epochs N             Training epochs (default: task-specific)
-  -l, --lr VALUE             Learning rate (default: task-specific)
   -i, --iters N              NDProp iterations (default: task-specific)
-      --logical-dim N        Logical feature channels (default: task-specific)
       --seed N               RNG seed (default: ${SEED})
       --log-root PATH        Output root
 
@@ -87,7 +82,6 @@ while [[ $# -gt 0 ]]; do
     -d|--device) DEVICE="$2"; shift 2 ;;
     -b|--batch-size) BATCH_SIZE="$2"; shift 2 ;;
     -e|--epochs) EPOCHS="$2"; EPOCHS_SET=true; shift 2 ;;
-    -l|--lr) LR="$2"; LR_SET=true; shift 2 ;;
     -i|--iters) ITERS="$2"; ITERS_SET=true; shift 2 ;;
     -m|--mnist-root) MNIST_ROOT="$2"; shift 2 ;;
     --train-file) TRAIN_FILE="$2"; shift 2 ;;
@@ -100,7 +94,6 @@ while [[ $# -gt 0 ]]; do
     --seed) SEED="$2"; shift 2 ;;
     --num-workers) NUM_WORKERS="$2"; shift 2 ;;
     --log-interval) LOG_INTERVAL="$2"; shift 2 ;;
-    --logical-dim) LOGICAL_DIM="$2"; shift 2 ;;
     --pairs-per-sample) PAIRS_PER_SAMPLE="$2"; shift 2 ;;
     --op-root) OP_ROOT="$2"; shift 2 ;;
     --op-train-subdir) OP_TRAIN_SUBDIR="$2"; shift 2 ;;
@@ -122,8 +115,8 @@ fi
 
 if [[ "${ITERS_SET}" != true ]]; then ITERS="${DEFAULT_ITERS[${DATASET}]}"; fi
 if [[ "${EPOCHS_SET}" != true ]]; then EPOCHS="${DEFAULT_EPOCHS[${DATASET}]}"; fi
-if [[ "${LR_SET}" != true ]]; then LR="${DEFAULT_LR[${DATASET}]}"; fi
 if [[ -z "${BATCH_SIZE}" ]]; then BATCH_SIZE="${DEFAULT_BATCH[${DATASET}]}"; fi
+LR="${DEFAULT_LR[${DATASET}]}"
 T_NORM="${DEFAULT_TNORM[${DATASET}]}"
 HIDDEN_DIM="${DEFAULT_HIDDEN[${DATASET}]}"
 LOGICAL_DIM="${DEFAULT_LOGICAL[${DATASET}]}"
