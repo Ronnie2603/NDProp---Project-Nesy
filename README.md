@@ -21,6 +21,8 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+Additionally, you have to install `pytorch`, as well as the `torch-geometric` and `torch-scatter` packages that correspond to your system and CUDA version. See the [PyTorch installation instructions](https://pytorch.org/get-started/locally/) and the [PyTorch GeIometric installation instructions](https://pytorch-geometric.readthedocs.io/en/latest/notes/installation.html) for guidance.
+
 The `clingo` Python package is sufficient for the default setup. You can also
 install a standalone `clingo` executable on `PATH`, or pass `--clingo-path` to
 scripts that expose that option.

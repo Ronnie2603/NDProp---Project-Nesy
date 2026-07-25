@@ -1,9 +1,5 @@
 clingo==5.8.0
 matplotlib==3.10.3
-numpy==2.3.5
+numpy==2.2.6
 pillow==12.0.0
-torch==2.5.1
-torch-geometric==2.6.1
-torch-scatter==2.1.2
-torchvision==0.20.1
 tqdm==4.67.1
