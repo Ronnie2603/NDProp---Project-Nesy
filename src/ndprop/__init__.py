@@ -10,6 +10,7 @@ from .data import (
     format_answer_set,
     load_program_from_aspif,
     ground_program_to_aspif,
+    sanitize_aspif_for_ndprop,
     get_stable_models,
 )
 from .training import train_epoch, evaluate
@@ -26,5 +27,6 @@ __all__ = [
     "evaluate",
     "load_program_from_aspif",
     "ground_program_to_aspif",
+    "sanitize_aspif_for_ndprop",
     "get_stable_models",
 ]

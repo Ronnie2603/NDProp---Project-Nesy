@@ -4,6 +4,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, Optional
 from collections import OrderedDict
+import os
+import tempfile
 
 import torch
 
@@ -281,11 +283,47 @@ def _load_program_graph(program_path: Path, clingo_path: Optional[str]) -> Progr
     suffix = program_path.suffix.lower()
     if suffix == ".aspif":
         return load_program_from_aspif(str(program_path), clingo_cmd, compute_stable_models=False)
+    if suffix == ".lp":
+        aspif_path = program_path.with_suffix(".aspif")
+        if not aspif_path.exists():
+            grounded = ground_program_to_aspif(
+                str(program_path),
+                clingo_cmd,
+                compute_stable_models=False,
+            )
+            aspif_text = grounded.grounded_aspif
+            if not aspif_text:
+                raise RuntimeError(f"Grounding '{program_path}' did not produce ASPIF output.")
+
+            # Atomic replacement keeps concurrent task starts from observing a
+            # partially written ASPIF file.
+            temp_path: Path | None = None
+            try:
+                with tempfile.NamedTemporaryFile(
+                    mode="w",
+                    encoding="utf-8",
+                    suffix=".aspif.tmp",
+                    prefix=f".{aspif_path.stem}.",
+                    dir=aspif_path.parent,
+                    delete=False,
+                ) as handle:
+                    handle.write(aspif_text)
+                    handle.write("\n")
+                    temp_path = Path(handle.name)
+                os.replace(temp_path, aspif_path)
+            finally:
+                if temp_path is not None and temp_path.exists():
+                    temp_path.unlink()
+        return load_program_from_aspif(
+            str(aspif_path),
+            clingo_cmd,
+            compute_stable_models=False,
+        )
     return ground_program_to_aspif(str(program_path), clingo_cmd)
 
 
 def load_program_graph(program_path: Path, clingo_path: Optional[str]) -> ProgramGraph:
-    """Public wrapper around the program loader."""
+    """Load ASPIF, compiling a missing sibling artifact for an LP program."""
     return _load_program_graph(program_path, clingo_path)
 
 

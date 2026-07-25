@@ -338,7 +338,12 @@ def main() -> None:
     device = torch.device(args.device)
     set_seed(args.seed)
 
-    run_root = args.log_root if args.log_root is not None else Path("./runs_nesy") / args.dataset
+    project_root = Path(__file__).resolve().parents[1]
+    run_root = (
+        args.log_root
+        if args.log_root is not None
+        else project_root / "runs_nesy" / "neuro_symbolic_tasks" / args.dataset
+    )
     run_dir = prepare_run_directory(run_root)
     setup_logging(run_dir / "train.log")
     LOGGER.info("Starting task=%s on device=%s", args.dataset, device)

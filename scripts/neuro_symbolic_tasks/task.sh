@@ -24,7 +24,7 @@ EVAL_FILE=""
 PROGRAM_PATH=""
 CLINGO_PATH=""
 PAIRS_PER_SAMPLE=2
-LOG_ROOT=""
+LOG_ROOT="${LOG_ROOT:-}"
 OP_ROOT=""
 OP_TRAIN_SUBDIR="train_apply2x2"
 OP_EVAL_SUBDIR="test_apply2x2"
@@ -48,7 +48,7 @@ Task and training:
   -e, --epochs N             Training epochs (default: task-specific)
   -i, --iters N              NDProp iterations (default: task-specific)
       --seed N               RNG seed (default: ${SEED})
-      --log-root PATH        Output root
+      --log-root PATH        Output root (default: PROJECT_ROOT/runs_nesy/neuro_symbolic_tasks/DATASET)
 
 Data and programs:
   -m, --mnist-root PATH      MNIST root (default: ${MNIST_ROOT})
@@ -112,6 +112,7 @@ if [[ -z "${DEFAULT_PROG[${DATASET}]+x}" ]]; then
   echo "Unknown dataset: ${DATASET}" >&2
   exit 1
 fi
+LOG_ROOT="${LOG_ROOT:-${PROJECT_ROOT}/runs_nesy/neuro_symbolic_tasks/${DATASET}}"
 
 if [[ "${ITERS_SET}" != true ]]; then ITERS="${DEFAULT_ITERS[${DATASET}]}"; fi
 if [[ "${EPOCHS_SET}" != true ]]; then EPOCHS="${DEFAULT_EPOCHS[${DATASET}]}"; fi
@@ -143,7 +144,7 @@ CMD=(
 )
 
 [[ "${USE_MNIST_TASK}" == true ]] && CMD+=(--mnist-root "${MNIST_ROOT}")
-[[ -n "${LOG_ROOT}" ]] && CMD+=(--log-root "${LOG_ROOT}")
+CMD+=(--log-root "${LOG_ROOT}")
 [[ -n "${use_train}" ]] && CMD+=(--train-pairs "${use_train}")
 [[ -n "${use_eval}" ]] && CMD+=(--eval-pairs "${use_eval}")
 [[ -n "${use_program}" ]] && CMD+=(--program-path "${use_program}")

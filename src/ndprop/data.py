@@ -730,6 +730,84 @@ def load_program_from_aspif(
         )
 
 
+def sanitize_aspif_for_ndprop(aspif_text: str) -> str:
+    """
+    Reduce grounded ASPIF to the normal rules supported by NDProp.
+
+    Neural task programs commonly use exact-choice rules only to declare their
+    neural input atoms. Clingo expands those choices into choice heads,
+    weighted bodies, integrity constraints, and anonymous support atoms.
+    NDProp injects the input atoms itself and supports only normal rules, so the
+    expanded choice machinery must not enter its program graph.
+    """
+    lines = [line.strip() for line in aspif_text.splitlines() if line.strip()]
+    normal_rules: list[tuple[str, list[int], list[int]]] = []
+    visible_atoms: set[int] = set()
+    other_records: list[str] = []
+
+    for line in lines:
+        if line.startswith("asp"):
+            continue
+        if line == "0":
+            continue
+        parts = line.split()
+        if parts[0] == "4":
+            # Output statement: 4 <name-length> <name> <n-literals> <literals>.
+            try:
+                literal_count = int(parts[3])
+                literals = [int(value) for value in parts[4 : 4 + literal_count]]
+            except (ValueError, IndexError):
+                literals = []
+            visible_atoms.update(abs(literal) for literal in literals if literal)
+            other_records.append(line)
+            continue
+        if parts[0] != "1":
+            # Preserve directives the graph loader does not need but which make
+            # the generated file a faithful, valid ASPIF artifact.
+            other_records.append(line)
+            continue
+
+        try:
+            cursor = 1
+            head_type = int(parts[cursor])
+            cursor += 1
+            head_count = int(parts[cursor])
+            cursor += 1
+            heads = [int(value) for value in parts[cursor : cursor + head_count]]
+            cursor += head_count
+            body_type = int(parts[cursor])
+            cursor += 1
+            body_count = int(parts[cursor])
+            cursor += 1
+            body = [int(value) for value in parts[cursor : cursor + body_count]]
+        except (ValueError, IndexError):
+            continue
+
+        # The ASPIF loader represents normal, non-constraint rules only.
+        if head_type == 0 and heads and body_type == 0:
+            normal_rules.append((line, heads, body))
+
+    # Drop anonymous facts and rules used exclusively by removed choice
+    # encodings. Work backwards from named/output atoms to retain all normal
+    # rules that can contribute to the task's observable atoms.
+    reachable = set(visible_atoms)
+    changed = True
+    while changed:
+        changed = False
+        for _, heads, body in normal_rules:
+            if any(head in reachable for head in heads):
+                dependencies = {abs(literal) for literal in body if literal}
+                new_atoms = dependencies.difference(reachable)
+                if new_atoms:
+                    reachable.update(new_atoms)
+                    changed = True
+
+    kept_rules = [
+        line for line, heads, _ in normal_rules if any(head in reachable for head in heads)
+    ]
+    return "\n".join(["asp 1 0 0", *kept_rules, *other_records, "0"])
+
+
 def ground_program_to_aspif(file_path: str, clingo_cmd: Sequence[str], compute_stable_models: bool = True) -> ProgramGraph:
     with tempfile.NamedTemporaryFile(suffix=".aspif", delete=False, mode="w", encoding="utf-8") as tmp:
         temp_path = tmp.name
@@ -743,11 +821,13 @@ def ground_program_to_aspif(file_path: str, clingo_cmd: Sequence[str], compute_s
         if result.returncode not in (0, 10, 20, 30):
             LOGGER.error("Clingo stderr:\n%s", result.stderr.strip())
             raise RuntimeError("Failed to ground program with clingo.")
+        sanitized_aspif = sanitize_aspif_for_ndprop(result.stdout)
         with open(temp_path, "w", encoding="utf-8") as out_file:
-            out_file.write(result.stdout)
+            out_file.write(sanitized_aspif)
+            out_file.write("\n")
         program = load_program_from_aspif(temp_path, clingo_cmd, atom_list, compute_stable_models=compute_stable_models)
         program.program_text = Path(file_path).read_text(encoding="utf-8").strip()
-        program.grounded_aspif = result.stdout.strip()
+        program.grounded_aspif = sanitized_aspif
         return program
     finally:
         try:
