@@ -730,7 +730,10 @@ def load_program_from_aspif(
         )
 
 
-def sanitize_aspif_for_ndprop(aspif_text: str) -> str:
+def sanitize_aspif_for_ndprop(
+    aspif_text: str,
+    atom_names: Optional[Sequence[str]] = None,
+) -> str:
     """
     Reduce grounded ASPIF to the normal rules supported by NDProp.
 
@@ -739,10 +742,17 @@ def sanitize_aspif_for_ndprop(aspif_text: str) -> str:
     weighted bodies, integrity constraints, and anonymous support atoms.
     NDProp injects the input atoms itself and supports only normal rules, so the
     expanded choice machinery must not enter its program graph.
+
+    When source atom names are available, only their output records are used
+    as graph roots; named outputs introduced solely during grounding are not.
     """
     lines = [line.strip() for line in aspif_text.splitlines() if line.strip()]
+    source_atoms = set(atom_names) if atom_names is not None else None
     normal_rules: list[tuple[str, list[int], list[int]]] = []
     visible_atoms: set[int] = set()
+    used_atoms: set[int] = set()
+    external_atoms: set[int] = set()
+    unconditional_outputs: list[tuple[str, str]] = []
     other_records: list[str] = []
 
     for line in lines:
@@ -753,17 +763,33 @@ def sanitize_aspif_for_ndprop(aspif_text: str) -> str:
         parts = line.split()
         if parts[0] == "4":
             # Output statement: 4 <name-length> <name> <n-literals> <literals>.
+            name = parts[2].strip('"') if len(parts) > 2 else ""
+            if source_atoms is not None and name not in source_atoms:
+                continue
             try:
                 literal_count = int(parts[3])
                 literals = [int(value) for value in parts[4 : 4 + literal_count]]
             except (ValueError, IndexError):
-                literals = []
-            visible_atoms.update(abs(literal) for literal in literals if literal)
-            other_records.append(line)
+                other_records.append(line)
+                continue
+            output_atoms = {abs(literal) for literal in literals if literal}
+            visible_atoms.update(output_atoms)
+            used_atoms.update(output_atoms)
+            if literal_count == 0:
+                unconditional_outputs.append((parts[1], parts[2]))
+            else:
+                other_records.append(line)
             continue
         if parts[0] != "1":
             # Preserve directives the graph loader does not need but which make
             # the generated file a faithful, valid ASPIF artifact.
+            if parts[0] == "5":  # External statement: 5 <atom> <value>.
+                try:
+                    external_atom = abs(int(parts[1]))
+                    external_atoms.add(external_atom)
+                    used_atoms.add(external_atom)
+                except (ValueError, IndexError):
+                    pass
             other_records.append(line)
             continue
 
@@ -783,9 +809,60 @@ def sanitize_aspif_for_ndprop(aspif_text: str) -> str:
         except (ValueError, IndexError):
             continue
 
+        used_atoms.update(abs(atom) for atom in heads if atom)
+        used_atoms.update(abs(literal) for literal in body if literal)
+
         # The ASPIF loader represents normal, non-constraint rules only.
         if head_type == 0 and heads and body_type == 0:
             normal_rules.append((line, heads, body))
+
+    # Clingo omits atom ids for named outputs that it proves unconditionally
+    # true. Give each such output an explicit fact so it survives reachability
+    # filtering and can be represented in the NDProp graph.
+    next_atom = 1
+    for name_length, name in unconditional_outputs:
+        while next_atom in used_atoms:
+            next_atom += 1
+        atom_id = next_atom
+        used_atoms.add(atom_id)
+        visible_atoms.add(atom_id)
+        normal_rules.append((f"1 0 1 {atom_id} 0 0", [atom_id], []))
+        other_records.append(f"4 {name_length} {name} 1 {atom_id}")
+
+    # Grounding can leave anonymous atoms that are fixed constants. Substitute
+    # them out of named rules so they cannot become spurious graph atoms.
+    auxiliary_atoms = used_atoms.difference(visible_atoms)
+    defined_auxiliary = {
+        head for _, heads, _ in normal_rules for head in heads if head in auxiliary_atoms
+    }
+    true_auxiliary = {
+        heads[0]
+        for _, heads, body in normal_rules
+        if len(heads) == 1 and not body and heads[0] in auxiliary_atoms
+    }
+    false_auxiliary = auxiliary_atoms.difference(defined_auxiliary, external_atoms)
+    simplified_rules: list[tuple[str, list[int], list[int]]] = []
+    for line, heads, body in normal_rules:
+        if any(
+            (literal > 0 and abs(literal) in false_auxiliary)
+            or (literal < 0 and abs(literal) in true_auxiliary)
+            for literal in body
+        ):
+            continue
+        simplified_body = [
+            literal
+            for literal in body
+            if not (
+                (literal > 0 and abs(literal) in true_auxiliary)
+                or (literal < 0 and abs(literal) in false_auxiliary)
+            )
+        ]
+        if simplified_body != body:
+            line = " ".join(
+                map(str, [1, 0, len(heads), *heads, 0, len(simplified_body), *simplified_body])
+            )
+        simplified_rules.append((line, heads, simplified_body))
+    normal_rules = simplified_rules
 
     # Drop anonymous facts and rules used exclusively by removed choice
     # encodings. Work backwards from named/output atoms to retain all normal
@@ -821,7 +898,7 @@ def ground_program_to_aspif(file_path: str, clingo_cmd: Sequence[str], compute_s
         if result.returncode not in (0, 10, 20, 30):
             LOGGER.error("Clingo stderr:\n%s", result.stderr.strip())
             raise RuntimeError("Failed to ground program with clingo.")
-        sanitized_aspif = sanitize_aspif_for_ndprop(result.stdout)
+        sanitized_aspif = sanitize_aspif_for_ndprop(result.stdout, atom_list)
         with open(temp_path, "w", encoding="utf-8") as out_file:
             out_file.write(sanitized_aspif)
             out_file.write("\n")
