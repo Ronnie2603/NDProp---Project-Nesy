@@ -1,9 +1,12 @@
 from typing import List, Optional, Tuple
 
+import numpy as np
 import torch
 from torch_geometric.loader import DataLoader
 
-from .losses import closest_stable_loss
+from .data import packed_stable_model_keys
+from .losses import closest_stable_loss, iter_program_targets
+from .model import NDProp
 
 
 def _project_atoms(tensor: torch.Tensor) -> torch.Tensor:
@@ -13,7 +16,26 @@ def _project_atoms(tensor: torch.Tensor) -> torch.Tensor:
     if tensor.dim() > 1 and tensor.size(-1) == 1:
         return tensor.squeeze(-1)
     return tensor
-from .model import NDProp
+
+
+def _stable_matches(binary_prediction: torch.Tensor, batch) -> List[bool]:
+    """Transfer the batch once, then query each program's packed target set."""
+    bits = binary_prediction.cpu().numpy()
+    layout = getattr(batch, "stable_target_layout", None)
+    if layout is None:
+        # Previously collated batches only carry flat target values and pointers.
+        atom_ptr = batch.atom_ptr.tolist()
+        spans = list(zip(atom_ptr, atom_ptr[1:]))
+        if getattr(batch, "stable_model_keys", None) is None:
+            batch.stable_model_keys = [
+                packed_stable_model_keys(rows) for _, _, rows in iter_program_targets(batch)
+            ]
+    else:
+        spans = [(start, end) for start, end, _, _, _ in layout]
+    return [
+        np.packbits(bits[start:end]).tobytes() in keys
+        for (start, end), keys in zip(spans, batch.stable_model_keys)
+    ]
 
 
 def train_epoch(
@@ -55,27 +77,9 @@ def train_epoch(
 
         total_loss += loss.item()
         projected = _project_atoms(pred)
-        pred_bin = (projected > 0.5).float()
-        atom_ptr = batch.atom_ptr.cpu().tolist()
-        stable_model_ptr = batch.stable_model_ptr.cpu().tolist()
-        stable_value_ptr = batch.stable_value_ptr.cpu().tolist()
-        stable_values = batch.stable_values
-        for i in range(len(atom_ptr) - 1):
-            atom_start, atom_end = atom_ptr[i], atom_ptr[i + 1]
-            stable_start, stable_end = stable_model_ptr[i], stable_model_ptr[i + 1]
-            candidate = pred_bin[atom_start:atom_end]
-            matched = False
-            for stable_idx in range(stable_start, stable_end):
-                value_start = stable_value_ptr[stable_idx]
-                value_end = stable_value_ptr[stable_idx + 1]
-                reference = stable_values[value_start:value_end]
-                if reference.numel() != candidate.numel():
-                    continue
-                if torch.equal(candidate, reference):
-                    matched = True
-                    break
-            stable_matches += int(matched)
-            total += 1
+        matches = _stable_matches(projected > 0.5, batch)
+        stable_matches += sum(matches)
+        total += len(matches)
     avg_loss = total_loss / max(1, total)
     accuracy = stable_matches / max(1, total)
     return avg_loss, accuracy
@@ -94,7 +98,6 @@ def evaluate(
     total_loss = 0.0
     stable_matches = 0
     total = 0
-    program_offset = 0
     for batch in loader:
         batch = batch.to(device)
         num_atoms = int(batch.num_atoms.item())
@@ -117,31 +120,11 @@ def evaluate(
         # batch_loss = batch_loss + (pred * (1 - pred)). mean()  # encourage predictions to be close to 0 or 1
         total_loss += batch_loss.item()
         projected = _project_atoms(pred)
-        pred_bin = (projected >= threshold).float()
-        atom_ptr = batch.atom_ptr.cpu().tolist()
-        stable_model_ptr = batch.stable_model_ptr.cpu().tolist()
-        stable_value_ptr = batch.stable_value_ptr.cpu().tolist()
-        stable_values = batch.stable_values
-        num_programs = len(atom_ptr) - 1
-        for i in range(num_programs):
-            atom_start, atom_end = atom_ptr[i], atom_ptr[i + 1]
-            stable_start, stable_end = stable_model_ptr[i], stable_model_ptr[i + 1]
-            candidate = pred_bin[atom_start:atom_end]
-            matched = False
-            for stable_idx in range(stable_start, stable_end):
-                value_start = stable_value_ptr[stable_idx]
-                value_end = stable_value_ptr[stable_idx + 1]
-                reference = stable_values[value_start:value_end]
-                if reference.numel() != candidate.numel():
-                    continue
-                if torch.equal(candidate, reference):
-                    matched = True
-                    break
-            stable_matches += int(matched)
-            total += 1
-            if not matched and unsolved_indices is not None:
-                unsolved_indices.append(program_offset + i)
-        program_offset += num_programs
+        matches = _stable_matches(projected >= threshold, batch)
+        if unsolved_indices is not None:
+            unsolved_indices.extend(total + i for i, matched in enumerate(matches) if not matched)
+        stable_matches += sum(matches)
+        total += len(matches)
     avg_loss = total_loss / max(1, total)
     accuracy = stable_matches / max(1, total)
     return avg_loss, accuracy

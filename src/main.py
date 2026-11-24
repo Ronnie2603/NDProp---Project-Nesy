@@ -51,6 +51,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--verbosity", type=int, default=1, help="Logging verbosity level (0-2).")
 
     parser.add_argument("--clingo-path", type=str, default=None, help="Path or name of clingo executable.")
+    parser.add_argument("--max-stable-models", type=int, default=None, help="Cap Clingo stable models per instance; omit for original behavior.")
     parser.add_argument(
         "--train-dir",
         type=Path,
@@ -157,7 +158,7 @@ def log_sample_evaluation(
     return predicted_sorted, actual
 
 
-def load_programs_from_directory(directory: Path, clingo_cmd: Sequence[str]) -> List[ProgramGraph]:
+def load_programs_from_directory(directory: Path, clingo_cmd: Sequence[str], max_stable_models: int | None = None) -> List[ProgramGraph]:
     if directory is None:
         return []
     if not directory.exists() or not directory.is_dir():
@@ -175,10 +176,10 @@ def load_programs_from_directory(directory: Path, clingo_cmd: Sequence[str]) -> 
         suffix = file_path.suffix.lower()
         try:
             if suffix == ".aspif":
-                program = load_program_from_aspif(str(file_path), clingo_cmd)
+                program = load_program_from_aspif(str(file_path), clingo_cmd, max_models=max_stable_models)
                 program.grounded_aspif = file_path.read_text(encoding="utf-8").strip()
             else:
-                program = ground_program_to_aspif(str(file_path), clingo_cmd)
+                program = ground_program_to_aspif(str(file_path), clingo_cmd, max_models=max_stable_models)
         except Exception as exc:  # pragma: no cover - defensive logging
             raise RuntimeError(f"Failed to load instance '{file_path}': {exc}") from exc
         program.source_path = str(file_path.resolve())
@@ -264,13 +265,13 @@ def main() -> None:
 
     LOGGER.info("Preparing datasets...")
     tic = time.time()
-    train_programs = load_programs_from_directory(args.train_dir, clingo_cmd)
+    train_programs = load_programs_from_directory(args.train_dir, clingo_cmd, max_stable_models=args.max_stable_models)
     LOGGER.info(
         "Loaded %d training programs from %s.",
         len(train_programs),
         args.train_dir,
     )
-    eval_programs = load_programs_from_directory(args.eval_dir, clingo_cmd)
+    eval_programs = load_programs_from_directory(args.eval_dir, clingo_cmd, max_stable_models=args.max_stable_models)
     LOGGER.info(
         "Loaded %d evaluation programs from %s.",
         len(eval_programs),

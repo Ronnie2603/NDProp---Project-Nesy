@@ -8,14 +8,24 @@ import subprocess
 import sys
 import tempfile
 from dataclasses import dataclass
+from functools import cached_property
 from pathlib import Path
 from typing import List, Optional, Sequence, Tuple
 
+import numpy as np
 import torch
 from torch_geometric.data import Data
 
 
 LOGGER = logging.getLogger(__name__)
+
+
+def packed_stable_model_keys(rows: torch.Tensor) -> frozenset[bytes]:
+    """Pack binary rows in atom order, excluding targets no binary prediction can match."""
+    bits = rows.bool()
+    binary_rows = bits[(rows == bits).all(dim=1)]
+    packed = np.packbits(binary_rows.cpu().numpy(), axis=1)
+    return frozenset(row.tobytes() for row in packed)
 
 
 @dataclass
@@ -36,6 +46,14 @@ class ProgramGraph:
     @property
     def num_rules(self) -> int:
         return int(self.graph.num_rules.item())
+
+    @cached_property
+    def stable_model_keys(self) -> frozenset[bytes]:
+        """Pack each binary target in this program's atom order for exact matching."""
+        targets = self.graph.stable_targets
+        if not targets.numel() or targets[0].numel() != self.num_atoms:
+            return frozenset()
+        return packed_stable_model_keys(targets.reshape(targets.size(0), self.num_atoms))
 
 
 def resolve_clingo_command(explicit_path: Optional[str]) -> List[str]:
@@ -63,6 +81,7 @@ def get_stable_models(
     file_path: Optional[str] = None,
     aspif: bool = False,
     enumerate_all: bool = True,
+    max_models: Optional[int] = None,
 ) -> List[List[str]]:
     """Returns all stable models reported by clingo."""
     if (program_text is None) == (file_path is None):
@@ -70,8 +89,12 @@ def get_stable_models(
     try:
         if file_path is not None:
             cmd = list(clingo_cmd) + ["--outf=2"]
-            if enumerate_all:
-                cmd += ['-n', '0']
+            if max_models is not None:
+                if max_models < 1:
+                    raise ValueError("max_models must be >= 1")
+                cmd += ["-n", str(max_models)]
+            elif enumerate_all:
+                cmd += ["-n", "0"]
             if aspif:
                 cmd.append("--mode=clingo")
             cmd.append(file_path)
@@ -83,8 +106,12 @@ def get_stable_models(
             )
         else:
             cmd = list(clingo_cmd) + ["--outf=2", "-"]
-            if enumerate_all:
-                cmd += ['-n', '0']
+            if max_models is not None:
+                if max_models < 1:
+                    raise ValueError("max_models must be >= 1")
+                cmd += ["-n", str(max_models)]
+            elif enumerate_all:
+                cmd += ["-n", "0"]
             if aspif:
                 cmd.insert(-1, "--mode=clingo")
             result = subprocess.run(
@@ -161,7 +188,7 @@ def program_to_graph(
             continue
         if ":-" in stripped:
             head_part, body_part = [part.strip() for part in stripped.split(":-", maxsplit=1)]
-            body_literals = [lit.strip() for lit in body_part.split(",") if lit.strip()]
+            body_literals = split_asp_literals(body_part)
         else:
             head_part = stripped
             body_literals = []
@@ -274,6 +301,8 @@ def collate_programs(programs: Sequence[ProgramGraph], no_stable_model = False) 
     stable_values_list = []
     stable_value_ptr = [0]
     stable_model_ptr = [0]
+    stable_target_layout = []
+    stable_model_keys = []
     fact_mask_list: List[torch.Tensor] = []
     fact_values_list: List[torch.Tensor] = []
     founded_mask_list: List[torch.Tensor] = []
@@ -320,13 +349,18 @@ def collate_programs(programs: Sequence[ProgramGraph], no_stable_model = False) 
         p0_list.append(g.p0)
         if not no_stable_model:
             y_list.append(g.y)
-        if not no_stable_model:
             num_stable_models = int(stable_targets.size(0)) if stable_targets.numel() > 0 else 0
-            for idx in range(num_stable_models):
-                flat = stable_targets[idx].reshape(-1)
-                stable_values_list.append(flat)
-                stable_value_ptr.append(stable_value_ptr[-1] + flat.numel())
+            value_start = stable_value_ptr[-1]
+            value_end = value_start + stable_targets.numel()
+            if num_stable_models:
+                width = stable_targets[0].numel()
+                stable_values_list.append(stable_targets.reshape(-1))
+                stable_value_ptr.extend(range(value_start + width, value_end + 1, width))
             stable_model_ptr.append(stable_model_ptr[-1] + num_stable_models)
+            stable_target_layout.append(
+                (atom_offset, atom_offset + num_atoms, value_start, value_end, num_stable_models)
+            )
+            stable_model_keys.append(prog.stable_model_keys)
 
         atom_offset += num_atoms
         rule_offset += num_rules
@@ -345,6 +379,8 @@ def collate_programs(programs: Sequence[ProgramGraph], no_stable_model = False) 
     data.p0 = torch.cat(p0_list, dim=0) if p0_list else torch.empty(0)
     if not no_stable_model:
         data.y = torch.cat(y_list, dim=0) if y_list else torch.empty(0)
+        data.stable_target_layout = stable_target_layout
+        data.stable_model_keys = stable_model_keys
 
     data.edge_pos = (
         torch.cat(edge_pos_list, dim=1)
@@ -396,6 +432,30 @@ def _strip_asp_comment(line: str) -> str:
     return line.split("%", maxsplit=1)[0].strip()
 
 
+def split_asp_literals(body: str) -> List[str]:
+    """Split comma-separated ASP literals without splitting predicate arguments."""
+    result: List[str] = []
+    start = depth = 0
+    for index, char in enumerate(body):
+        if char == "(":
+            depth += 1
+        elif char == ")":
+            depth -= 1
+            if depth < 0:
+                raise ValueError("Unbalanced parentheses in ASP body")
+        elif char == "," and depth == 0:
+            item = body[start:index].strip()
+            if item:
+                result.append(item)
+            start = index + 1
+    if depth:
+        raise ValueError("Unbalanced parentheses in ASP body")
+    last = body[start:].strip()
+    if last:
+        result.append(last)
+    return result
+
+
 def parse_program_text(program_text: str) -> Tuple[List[Tuple[str, List[str]]], List[str]]:
     statements: List[str] = []
     current_parts: List[str] = []
@@ -429,11 +489,7 @@ def parse_program_text(program_text: str) -> Tuple[List[Tuple[str, List[str]]], 
             if not head_part:
                 raise ValueError("Constraint rules are not supported.")
             head_atom = head_part
-            body_literals = [
-                literal.strip()
-                for literal in body_part.split(",")
-                if literal.strip()
-            ]
+            body_literals = split_asp_literals(body_part)
         else:
             head_atom = rule_text
             body_literals = []
@@ -480,6 +536,7 @@ def load_program_from_aspif(
     clingo_cmd: Sequence[str],
     atom_list: Optional[Sequence[str]] = None,
     compute_stable_models: bool = True,
+    max_models: Optional[int] = None,
 ) -> ProgramGraph:
     with open(file_path, "r", encoding="utf-8") as f:
         aspif_text = f.read()
@@ -651,7 +708,7 @@ def load_program_from_aspif(
         raise ValueError("No atoms found in ASPIF file.")
 
     if compute_stable_models:
-        stable_models = get_stable_models(clingo_cmd, file_path=file_path, aspif=True)
+        stable_models = get_stable_models(clingo_cmd, file_path=file_path, aspif=True, max_models=max_models)
         if not stable_models:
             raise ValueError("ASPIF program is UNSAT under clingo evaluation.")
     graph = Data()
@@ -885,7 +942,7 @@ def sanitize_aspif_for_ndprop(
     return "\n".join(["asp 1 0 0", *kept_rules, *other_records, "0"])
 
 
-def ground_program_to_aspif(file_path: str, clingo_cmd: Sequence[str], compute_stable_models: bool = True) -> ProgramGraph:
+def ground_program_to_aspif(file_path: str, clingo_cmd: Sequence[str], compute_stable_models: bool = True, max_models: Optional[int] = None) -> ProgramGraph:
     with tempfile.NamedTemporaryFile(suffix=".aspif", delete=False, mode="w", encoding="utf-8") as tmp:
         temp_path = tmp.name
     try:
@@ -902,7 +959,7 @@ def ground_program_to_aspif(file_path: str, clingo_cmd: Sequence[str], compute_s
         with open(temp_path, "w", encoding="utf-8") as out_file:
             out_file.write(sanitized_aspif)
             out_file.write("\n")
-        program = load_program_from_aspif(temp_path, clingo_cmd, atom_list, compute_stable_models=compute_stable_models)
+        program = load_program_from_aspif(temp_path, clingo_cmd, atom_list, compute_stable_models=compute_stable_models, max_models=max_models)
         program.program_text = Path(file_path).read_text(encoding="utf-8").strip()
         program.grounded_aspif = sanitized_aspif
         return program
