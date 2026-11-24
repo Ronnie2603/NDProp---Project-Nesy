@@ -21,6 +21,7 @@ import random
 import shutil
 import time
 from collections import Counter
+from itertools import combinations, product
 from pathlib import Path
 
 
@@ -97,6 +98,88 @@ def grounded_normal_asp(n, edges, k):
     return "\n".join(lines) + "\n"
 
 
+def ordered_coloring_asp(neighbors, k, fixed):
+    """Choose a vertex color conditional on the colors of earlier neighbors.
+
+    In a stable model, exactly one assignment to the earlier neighbors holds.
+    Its rules allow one of the remaining colors, or force it if only one is
+    available. The odd loop excludes a prefix that leaves no color available.
+    """
+    colors = range(1, k + 1)
+    max_conditioned_neighbors = 3
+    done = set()
+    pending = set(range(len(neighbors)))
+    # Prefer vertices with several known neighbors so forced colors propagate.
+    first = iter(fixed)
+    lines = ["% Fully grounded coloring conditional on earlier neighbors"]
+
+    def atom(v, c):
+        return f"color({v + 1},{c})"
+
+    while pending:
+        v = next(first, None)
+        if v is None:
+            v = max(pending, key=lambda u: (len(neighbors[u] & done), len(neighbors[u] & pending), -u))
+        if v in fixed:
+            lines.append(f"{atom(v, fixed[v])}.")
+        else:
+            earlier = sorted(neighbors[v] & done)
+            # Bound the local table on dense graphs. Every remaining edge still
+            # has an ordinary conflict rule, so it rules out the same colorings.
+            parents = earlier[:max_conditioned_neighbors]
+            domains = [(fixed[u],) if u in fixed else colors for u in parents]
+            adjacent_pairs = [(i, j) for i, j in combinations(range(len(parents)), 2)
+                              if parents[j] in neighbors[parents[i]]]
+            for assignment in product(*domains):
+                if any(assignment[i] == assignment[j] for i, j in adjacent_pairs):
+                    continue
+                available = [c for c in colors if c not in assignment]
+                conditions = [atom(u, c) for u, c in zip(parents, assignment)]
+                for c in available:
+                    body = conditions + [f"not {atom(v, d)}" for d in available if d != c]
+                    head = atom(v, c)
+                    lines.append(f"{head} :- {', '.join(body)}." if body else f"{head}.")
+            for u in earlier[max_conditioned_neighbors:]:
+                for c in colors:
+                    lines.append(f"bad :- {atom(u, c)}, {atom(v, c)}, not bad.")
+        # A predecessor assignment can use the entire palette.
+        missing = ", ".join(f"not {atom(v, c)}" for c in colors)
+        lines.append(f"bad :- {missing}, not bad.")
+        pending.remove(v)
+        done.add(v)
+    return "\n".join(lines) + "\n"
+
+
+def encode_coloring(n, edges, k, encoding):
+    """Return the ground program and the vertex colors fixed by symmetry."""
+    if encoding == "neutral":
+        return grounded_normal_asp(n, edges, k), {}
+    if encoding != "ordered-anchored":
+        raise ValueError(f"Unknown coloring encoding {encoding!r}")
+    if k < 2 or not edges:
+        raise ValueError("ordered-anchored requires at least two colors and one edge")
+    neighbors = [set() for _ in range(n)]
+    for u, v in edges:
+        neighbors[u].add(v)
+        neighbors[v].add(u)
+    # An edge in several triangles can immediately force several third colors.
+    u, v = max(edges, key=lambda e: (len(neighbors[e[0]] & neighbors[e[1]]),
+                                   len(neighbors[e[0]]) + len(neighbors[e[1]]),
+                                   -e[0], -e[1]))
+    fixed = {u: 1, v: 2}
+    return ordered_coloring_asp(neighbors, k, fixed), fixed
+
+
+def relabel_witness(witness, fixed, k):
+    """Permute color names so the CSV witness satisfies the same fixed facts."""
+    permutation = {witness[v]: c for v, c in fixed.items()}
+    palette = range(1, k + 1)
+    old = [c for c in palette if c not in permutation]
+    new = [c for c in palette if c not in permutation.values()]
+    permutation.update(zip(old, new))
+    return [permutation[c] for c in witness]
+
+
 def dimacs_col(n, edges):
     return "\n".join(["c Graph coloring instance", f"p edge {n} {len(edges)}"] +
                      [f"e {u + 1} {v + 1}" for u, v in edges]) + "\n"
@@ -131,6 +214,9 @@ def generate(args):
     if args.k > args.n:
         raise ValueError("k cannot be greater than n")
     groups = parse_ranges(args.ranges, args.n)
+    encoding = getattr(args, "encoding", "neutral")
+    if encoding == "ordered-anchored" and (args.k < 2 or any(0 in counts for counts in groups.values())):
+        raise ValueError("ordered-anchored requires at least two colors and an edge in every graph")
     rng = random.Random(args.seed)
     possible_edges = [(u, v) for u in range(args.n) for v in range(u + 1, args.n)]
     root = Path(args.out)
@@ -183,7 +269,10 @@ def generate(args):
                 col = folder / f"{stem}.col"
                 lp = folder / f"{stem}.lp"
                 col.write_text(dimacs_col(args.n, edges), encoding="utf-8")
-                lp.write_text(grounded_normal_asp(args.n, edges, args.k), encoding="utf-8")
+                program, fixed = encode_coloring(args.n, edges, args.k, encoding)
+                lp.write_text(program, encoding="utf-8")
+                if fixed:
+                    witness = relabel_witness(witness, fixed, args.k)
                 records.append({
                     "id": stem,
                     "split": split,
@@ -211,7 +300,9 @@ def generate(args):
         "seed": args.seed, "n": args.n, "k": args.k, "ranges": args.ranges,
         "splits_per_difficulty": split_sizes, "sat_only": True,
         "exact_solver": "pure Python DSATUR-style backtracking",
-        "asp_encoding": "fully grounded normal rules; odd-loop bad, no integrity constraints",
+        "asp_encoding": ("fully grounded normal rules; odd-loop bad, no integrity constraints"
+                         if encoding == "neutral" else "fully grounded conditional choices with one fixed edge"),
+        "encoding": encoding,
         "difficulty_note": "Edge-count tiers are not certified computational difficulty",
     }
     (root / "config.json").write_text(json.dumps(metadata, indent=2) + "\n", encoding="utf-8")
@@ -223,6 +314,8 @@ def main():
     parser.add_argument("--out", default="graph_coloring_sat_grounded", help="Output directory")
     parser.add_argument("--n", type=int, default=22, help="Vertices per graph")
     parser.add_argument("--k", type=int, default=3, help="Colors per graph")
+    parser.add_argument("--encoding", choices=("neutral", "ordered-anchored"), default="neutral",
+                        help="Use independent local choices or ordered dependencies with two fixed colors")
     parser.add_argument("--ranges", default="easy=38:41,medium=42:45,hard=46:49",
                         help="Edge ranges per difficulty")
     parser.add_argument("--train", type=int, default=1000, help="Train graphs PER difficulty")
@@ -237,4 +330,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
