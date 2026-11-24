@@ -1,0 +1,266 @@
+{
+  "epoch": 1000,
+  "count": 52,
+  "problems": [
+    {
+      "index": 0,
+      "label": "Program_1",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0042_sat_0001.lp"
+    },
+    {
+      "index": 1,
+      "label": "Program_2",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0042_sat_0002.lp"
+    },
+    {
+      "index": 2,
+      "label": "Program_3",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0042_sat_0003.lp"
+    },
+    {
+      "index": 4,
+      "label": "Program_5",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0042_sat_0005.lp"
+    },
+    {
+      "index": 5,
+      "label": "Program_6",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0042_sat_0006.lp"
+    },
+    {
+      "index": 6,
+      "label": "Program_7",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0042_sat_0007.lp"
+    },
+    {
+      "index": 8,
+      "label": "Program_9",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0042_sat_0009.lp"
+    },
+    {
+      "index": 12,
+      "label": "Program_13",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0042_sat_0013.lp"
+    },
+    {
+      "index": 13,
+      "label": "Program_14",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0042_sat_0014.lp"
+    },
+    {
+      "index": 14,
+      "label": "Program_15",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0042_sat_0015.lp"
+    },
+    {
+      "index": 15,
+      "label": "Program_16",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0042_sat_0016.lp"
+    },
+    {
+      "index": 17,
+      "label": "Program_18",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0042_sat_0018.lp"
+    },
+    {
+      "index": 20,
+      "label": "Program_21",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0042_sat_0021.lp"
+    },
+    {
+      "index": 22,
+      "label": "Program_23",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0042_sat_0023.lp"
+    },
+    {
+      "index": 23,
+      "label": "Program_24",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0042_sat_0024.lp"
+    },
+    {
+      "index": 25,
+      "label": "Program_26",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0043_sat_0001.lp"
+    },
+    {
+      "index": 26,
+      "label": "Program_27",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0043_sat_0002.lp"
+    },
+    {
+      "index": 29,
+      "label": "Program_30",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0043_sat_0005.lp"
+    },
+    {
+      "index": 31,
+      "label": "Program_32",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0043_sat_0007.lp"
+    },
+    {
+      "index": 33,
+      "label": "Program_34",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0043_sat_0009.lp"
+    },
+    {
+      "index": 34,
+      "label": "Program_35",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0043_sat_0010.lp"
+    },
+    {
+      "index": 35,
+      "label": "Program_36",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0043_sat_0011.lp"
+    },
+    {
+      "index": 38,
+      "label": "Program_39",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0043_sat_0014.lp"
+    },
+    {
+      "index": 39,
+      "label": "Program_40",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0043_sat_0015.lp"
+    },
+    {
+      "index": 43,
+      "label": "Program_44",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0043_sat_0019.lp"
+    },
+    {
+      "index": 46,
+      "label": "Program_47",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0043_sat_0022.lp"
+    },
+    {
+      "index": 47,
+      "label": "Program_48",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0043_sat_0023.lp"
+    },
+    {
+      "index": 49,
+      "label": "Program_50",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0043_sat_0025.lp"
+    },
+    {
+      "index": 50,
+      "label": "Program_51",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0044_sat_0001.lp"
+    },
+    {
+      "index": 51,
+      "label": "Program_52",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0044_sat_0002.lp"
+    },
+    {
+      "index": 55,
+      "label": "Program_56",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0044_sat_0006.lp"
+    },
+    {
+      "index": 59,
+      "label": "Program_60",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0044_sat_0010.lp"
+    },
+    {
+      "index": 61,
+      "label": "Program_62",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0044_sat_0012.lp"
+    },
+    {
+      "index": 63,
+      "label": "Program_64",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0044_sat_0014.lp"
+    },
+    {
+      "index": 64,
+      "label": "Program_65",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0044_sat_0015.lp"
+    },
+    {
+      "index": 65,
+      "label": "Program_66",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0044_sat_0016.lp"
+    },
+    {
+      "index": 68,
+      "label": "Program_69",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0044_sat_0019.lp"
+    },
+    {
+      "index": 69,
+      "label": "Program_70",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0044_sat_0020.lp"
+    },
+    {
+      "index": 75,
+      "label": "Program_76",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0045_sat_0001.lp"
+    },
+    {
+      "index": 77,
+      "label": "Program_78",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0045_sat_0003.lp"
+    },
+    {
+      "index": 79,
+      "label": "Program_80",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0045_sat_0005.lp"
+    },
+    {
+      "index": 81,
+      "label": "Program_82",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0045_sat_0007.lp"
+    },
+    {
+      "index": 84,
+      "label": "Program_85",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0045_sat_0010.lp"
+    },
+    {
+      "index": 85,
+      "label": "Program_86",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0045_sat_0011.lp"
+    },
+    {
+      "index": 86,
+      "label": "Program_87",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0045_sat_0012.lp"
+    },
+    {
+      "index": 87,
+      "label": "Program_88",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0045_sat_0013.lp"
+    },
+    {
+      "index": 88,
+      "label": "Program_89",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0045_sat_0014.lp"
+    },
+    {
+      "index": 90,
+      "label": "Program_91",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0045_sat_0016.lp"
+    },
+    {
+      "index": 92,
+      "label": "Program_93",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0045_sat_0018.lp"
+    },
+    {
+      "index": 93,
+      "label": "Program_94",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0045_sat_0019.lp"
+    },
+    {
+      "index": 97,
+      "label": "Program_98",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0045_sat_0023.lp"
+    },
+    {
+      "index": 98,
+      "label": "Program_99",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/medium/medium_val_0045_sat_0024.lp"
+    }
+  ]
+}

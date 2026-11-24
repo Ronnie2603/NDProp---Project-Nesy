@@ -1,0 +1,301 @@
+2026-11-24 11:00:08,573 - INFO - Preparing datasets...
+2026-11-24 11:01:05,974 - INFO - Loaded 1000 training programs from /home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/train/easy.
+2026-11-24 11:01:11,656 - INFO - Loaded 100 evaluation programs from /home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy.
+2026-11-24 11:01:11,662 - INFO - Dataset preparation completed in 63.09 seconds.
+2026-11-24 11:01:16,576 - INFO - Epoch 0001 | train_loss=0.4011 | eval_loss=0.4002 | train_stable=7.60% | eval_stable=5.00% | best_acc=5.00% (epoch 1)
+2026-11-24 11:01:48,658 - INFO - Epoch 0010 | train_loss=0.3828 | eval_loss=0.3803 | train_stable=6.00% | eval_stable=6.00% | best_acc=10.00% (epoch 2)
+2026-11-24 11:02:24,090 - INFO - Epoch 0020 | train_loss=0.3679 | eval_loss=0.3782 | train_stable=12.00% | eval_stable=9.00% | best_acc=13.00% (epoch 18)
+2026-11-24 11:03:00,081 - INFO - Epoch 0030 | train_loss=0.3606 | eval_loss=0.3657 | train_stable=13.20% | eval_stable=13.00% | best_acc=15.00% (epoch 26)
+2026-11-24 11:03:33,070 - INFO - Epoch 0040 | train_loss=0.3560 | eval_loss=0.3563 | train_stable=16.30% | eval_stable=12.00% | best_acc=17.00% (epoch 38)
+2026-11-24 11:04:08,842 - INFO - Epoch 0050 | train_loss=0.3512 | eval_loss=0.3488 | train_stable=14.70% | eval_stable=12.00% | best_acc=21.00% (epoch 44)
+2026-11-24 11:04:44,939 - INFO - Epoch 0060 | train_loss=0.3567 | eval_loss=0.3674 | train_stable=13.90% | eval_stable=16.00% | best_acc=21.00% (epoch 57)
+2026-11-24 11:05:16,575 - INFO - Epoch 0070 | train_loss=0.3556 | eval_loss=0.3593 | train_stable=15.00% | eval_stable=10.00% | best_acc=21.00% (epoch 62)
+2026-11-24 11:05:52,514 - INFO - Epoch 0080 | train_loss=0.3577 | eval_loss=0.3584 | train_stable=11.40% | eval_stable=13.00% | best_acc=24.00% (epoch 76)
+2026-11-24 11:06:28,297 - INFO - Epoch 0090 | train_loss=0.3600 | eval_loss=0.3458 | train_stable=12.90% | eval_stable=21.00% | best_acc=24.00% (epoch 76)
+2026-11-24 11:07:04,149 - INFO - Epoch 0100 | train_loss=0.3493 | eval_loss=0.3485 | train_stable=14.70% | eval_stable=24.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:07:40,061 - INFO - Epoch 0110 | train_loss=0.3605 | eval_loss=0.3557 | train_stable=13.30% | eval_stable=12.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:08:15,820 - INFO - Epoch 0120 | train_loss=0.3577 | eval_loss=0.3504 | train_stable=14.50% | eval_stable=16.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:08:51,684 - INFO - Epoch 0130 | train_loss=0.3560 | eval_loss=0.3696 | train_stable=13.70% | eval_stable=12.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:09:27,440 - INFO - Epoch 0140 | train_loss=0.3551 | eval_loss=0.3453 | train_stable=14.20% | eval_stable=16.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:10:03,288 - INFO - Epoch 0150 | train_loss=0.3556 | eval_loss=0.3557 | train_stable=12.70% | eval_stable=17.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:10:39,418 - INFO - Epoch 0160 | train_loss=0.3531 | eval_loss=0.3612 | train_stable=14.30% | eval_stable=15.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:11:15,278 - INFO - Epoch 0170 | train_loss=0.3518 | eval_loss=0.3513 | train_stable=16.00% | eval_stable=11.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:11:51,348 - INFO - Epoch 0180 | train_loss=0.3481 | eval_loss=0.3600 | train_stable=15.20% | eval_stable=14.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:12:27,463 - INFO - Epoch 0190 | train_loss=0.3531 | eval_loss=0.3515 | train_stable=15.60% | eval_stable=14.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:13:03,581 - INFO - Epoch 0200 | train_loss=0.3521 | eval_loss=0.3770 | train_stable=14.70% | eval_stable=14.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:13:39,827 - INFO - Epoch 0210 | train_loss=0.3454 | eval_loss=0.3587 | train_stable=17.50% | eval_stable=17.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:14:15,797 - INFO - Epoch 0220 | train_loss=0.3555 | eval_loss=0.3715 | train_stable=13.20% | eval_stable=16.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:14:51,980 - INFO - Epoch 0230 | train_loss=0.3554 | eval_loss=0.3640 | train_stable=14.40% | eval_stable=11.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:15:23,852 - INFO - Epoch 0240 | train_loss=0.3534 | eval_loss=0.3533 | train_stable=15.90% | eval_stable=23.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:15:53,793 - INFO - Epoch 0250 | train_loss=0.3491 | eval_loss=0.3562 | train_stable=16.60% | eval_stable=16.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:16:23,598 - INFO - Epoch 0260 | train_loss=0.3514 | eval_loss=0.3542 | train_stable=15.10% | eval_stable=16.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:16:57,303 - INFO - Epoch 0270 | train_loss=0.3466 | eval_loss=0.3549 | train_stable=16.90% | eval_stable=17.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:17:33,809 - INFO - Epoch 0280 | train_loss=0.3470 | eval_loss=0.3418 | train_stable=15.90% | eval_stable=21.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:18:10,447 - INFO - Epoch 0290 | train_loss=0.3454 | eval_loss=0.3499 | train_stable=17.80% | eval_stable=17.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:18:46,860 - INFO - Epoch 0300 | train_loss=0.3465 | eval_loss=0.3362 | train_stable=16.80% | eval_stable=21.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:19:23,644 - INFO - Epoch 0310 | train_loss=0.3474 | eval_loss=0.3401 | train_stable=15.90% | eval_stable=16.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:19:58,579 - INFO - Epoch 0320 | train_loss=0.3475 | eval_loss=0.3430 | train_stable=15.60% | eval_stable=23.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:20:33,616 - INFO - Epoch 0330 | train_loss=0.3483 | eval_loss=0.3497 | train_stable=17.00% | eval_stable=17.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:21:08,861 - INFO - Epoch 0340 | train_loss=0.3525 | eval_loss=0.3292 | train_stable=14.20% | eval_stable=22.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:21:43,707 - INFO - Epoch 0350 | train_loss=0.3525 | eval_loss=0.3504 | train_stable=14.20% | eval_stable=15.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:22:18,745 - INFO - Epoch 0360 | train_loss=0.3467 | eval_loss=0.3436 | train_stable=17.60% | eval_stable=17.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:22:54,180 - INFO - Epoch 0370 | train_loss=0.3485 | eval_loss=0.3353 | train_stable=17.30% | eval_stable=23.00% | best_acc=24.00% (epoch 100)
+2026-11-24 11:23:30,670 - INFO - Epoch 0380 | train_loss=0.3484 | eval_loss=0.3347 | train_stable=16.40% | eval_stable=17.00% | best_acc=24.00% (epoch 379)
+2026-11-24 11:24:06,910 - INFO - Epoch 0390 | train_loss=0.3419 | eval_loss=0.3559 | train_stable=15.80% | eval_stable=16.00% | best_acc=24.00% (epoch 379)
+2026-11-24 11:24:43,106 - INFO - Epoch 0400 | train_loss=0.3452 | eval_loss=0.3371 | train_stable=15.20% | eval_stable=20.00% | best_acc=24.00% (epoch 379)
+2026-11-24 11:25:19,686 - INFO - Epoch 0410 | train_loss=0.3453 | eval_loss=0.3319 | train_stable=16.80% | eval_stable=17.00% | best_acc=24.00% (epoch 379)
+2026-11-24 11:25:56,207 - INFO - Epoch 0420 | train_loss=0.3488 | eval_loss=0.3524 | train_stable=15.00% | eval_stable=16.00% | best_acc=24.00% (epoch 379)
+2026-11-24 11:26:33,009 - INFO - Epoch 0430 | train_loss=0.3447 | eval_loss=0.3524 | train_stable=17.20% | eval_stable=19.00% | best_acc=24.00% (epoch 379)
+2026-11-24 11:27:09,323 - INFO - Epoch 0440 | train_loss=0.3528 | eval_loss=0.3590 | train_stable=15.70% | eval_stable=17.00% | best_acc=24.00% (epoch 439)
+2026-11-24 11:27:45,782 - INFO - Epoch 0450 | train_loss=0.3476 | eval_loss=0.3395 | train_stable=15.50% | eval_stable=20.00% | best_acc=24.00% (epoch 448)
+2026-11-24 11:28:22,608 - INFO - Epoch 0460 | train_loss=0.3511 | eval_loss=0.3344 | train_stable=15.80% | eval_stable=13.00% | best_acc=24.00% (epoch 448)
+2026-11-24 11:28:58,927 - INFO - Epoch 0470 | train_loss=0.3491 | eval_loss=0.3413 | train_stable=16.10% | eval_stable=24.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:29:35,426 - INFO - Epoch 0480 | train_loss=0.3490 | eval_loss=0.3537 | train_stable=16.20% | eval_stable=12.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:30:11,633 - INFO - Epoch 0490 | train_loss=0.3479 | eval_loss=0.3496 | train_stable=16.70% | eval_stable=19.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:30:48,138 - INFO - Epoch 0500 | train_loss=0.3452 | eval_loss=0.3443 | train_stable=15.80% | eval_stable=19.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:31:22,115 - INFO - Epoch 0510 | train_loss=0.3481 | eval_loss=0.3446 | train_stable=17.10% | eval_stable=19.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:31:55,999 - INFO - Epoch 0520 | train_loss=0.3503 | eval_loss=0.3440 | train_stable=16.10% | eval_stable=18.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:32:32,384 - INFO - Epoch 0530 | train_loss=0.3440 | eval_loss=0.3396 | train_stable=16.00% | eval_stable=19.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:33:08,984 - INFO - Epoch 0540 | train_loss=0.3504 | eval_loss=0.3486 | train_stable=16.20% | eval_stable=14.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:33:45,445 - INFO - Epoch 0550 | train_loss=0.3469 | eval_loss=0.3344 | train_stable=17.30% | eval_stable=19.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:34:21,997 - INFO - Epoch 0560 | train_loss=0.3489 | eval_loss=0.3397 | train_stable=16.10% | eval_stable=21.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:34:57,676 - INFO - Epoch 0570 | train_loss=0.3487 | eval_loss=0.3439 | train_stable=17.00% | eval_stable=21.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:35:34,317 - INFO - Epoch 0580 | train_loss=0.3488 | eval_loss=0.3460 | train_stable=15.10% | eval_stable=22.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:36:11,152 - INFO - Epoch 0590 | train_loss=0.3483 | eval_loss=0.3561 | train_stable=17.00% | eval_stable=17.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:36:47,738 - INFO - Epoch 0600 | train_loss=0.3464 | eval_loss=0.3472 | train_stable=16.90% | eval_stable=17.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:37:24,433 - INFO - Epoch 0610 | train_loss=0.3473 | eval_loss=0.3431 | train_stable=16.80% | eval_stable=18.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:38:00,893 - INFO - Epoch 0620 | train_loss=0.3430 | eval_loss=0.3546 | train_stable=16.40% | eval_stable=15.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:38:34,974 - INFO - Epoch 0630 | train_loss=0.3400 | eval_loss=0.3570 | train_stable=16.10% | eval_stable=16.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:39:11,669 - INFO - Epoch 0640 | train_loss=0.3473 | eval_loss=0.3517 | train_stable=16.40% | eval_stable=17.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:39:43,929 - INFO - Epoch 0650 | train_loss=0.3443 | eval_loss=0.3500 | train_stable=16.90% | eval_stable=16.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:40:19,141 - INFO - Epoch 0660 | train_loss=0.3399 | eval_loss=0.3432 | train_stable=18.20% | eval_stable=19.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:40:56,177 - INFO - Epoch 0670 | train_loss=0.3509 | eval_loss=0.3567 | train_stable=15.50% | eval_stable=18.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:41:32,622 - INFO - Epoch 0680 | train_loss=0.3470 | eval_loss=0.3384 | train_stable=16.70% | eval_stable=18.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:42:09,289 - INFO - Epoch 0690 | train_loss=0.3490 | eval_loss=0.3415 | train_stable=15.80% | eval_stable=18.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:42:45,511 - INFO - Epoch 0700 | train_loss=0.3433 | eval_loss=0.3308 | train_stable=17.60% | eval_stable=19.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:43:21,671 - INFO - Epoch 0710 | train_loss=0.3479 | eval_loss=0.3543 | train_stable=17.10% | eval_stable=20.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:43:52,543 - INFO - Epoch 0720 | train_loss=0.3438 | eval_loss=0.3460 | train_stable=17.80% | eval_stable=9.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:44:29,343 - INFO - Epoch 0730 | train_loss=0.3454 | eval_loss=0.3495 | train_stable=16.50% | eval_stable=13.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:45:06,194 - INFO - Epoch 0740 | train_loss=0.3482 | eval_loss=0.3574 | train_stable=16.40% | eval_stable=23.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:45:42,654 - INFO - Epoch 0750 | train_loss=0.3414 | eval_loss=0.3480 | train_stable=18.20% | eval_stable=21.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:46:15,816 - INFO - Epoch 0760 | train_loss=0.3477 | eval_loss=0.3480 | train_stable=17.80% | eval_stable=15.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:46:51,604 - INFO - Epoch 0770 | train_loss=0.3452 | eval_loss=0.3458 | train_stable=17.20% | eval_stable=18.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:47:28,008 - INFO - Epoch 0780 | train_loss=0.3425 | eval_loss=0.3413 | train_stable=16.30% | eval_stable=19.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:47:58,272 - INFO - Epoch 0790 | train_loss=0.3423 | eval_loss=0.3500 | train_stable=17.10% | eval_stable=18.00% | best_acc=26.00% (epoch 466)
+2026-11-24 11:48:32,311 - INFO - Epoch 0800 | train_loss=0.3431 | eval_loss=0.3529 | train_stable=18.80% | eval_stable=17.00% | best_acc=26.00% (epoch 798)
+2026-11-24 11:49:08,978 - INFO - Epoch 0810 | train_loss=0.3465 | eval_loss=0.3426 | train_stable=17.90% | eval_stable=20.00% | best_acc=26.00% (epoch 798)
+2026-11-24 11:49:45,622 - INFO - Epoch 0820 | train_loss=0.3442 | eval_loss=0.3380 | train_stable=17.70% | eval_stable=18.00% | best_acc=26.00% (epoch 798)
+2026-11-24 11:50:21,848 - INFO - Epoch 0830 | train_loss=0.3502 | eval_loss=0.3412 | train_stable=17.70% | eval_stable=20.00% | best_acc=26.00% (epoch 798)
+2026-11-24 11:50:56,495 - INFO - Epoch 0840 | train_loss=0.3458 | eval_loss=0.3565 | train_stable=17.10% | eval_stable=13.00% | best_acc=26.00% (epoch 798)
+2026-11-24 11:51:29,246 - INFO - Epoch 0850 | train_loss=0.3464 | eval_loss=0.3594 | train_stable=16.00% | eval_stable=13.00% | best_acc=26.00% (epoch 798)
+2026-11-24 11:52:05,576 - INFO - Epoch 0860 | train_loss=0.3413 | eval_loss=0.3414 | train_stable=17.50% | eval_stable=22.00% | best_acc=26.00% (epoch 798)
+2026-11-24 11:52:41,985 - INFO - Epoch 0870 | train_loss=0.3464 | eval_loss=0.3375 | train_stable=16.60% | eval_stable=19.00% | best_acc=26.00% (epoch 798)
+2026-11-24 11:53:17,164 - INFO - Epoch 0880 | train_loss=0.3413 | eval_loss=0.3425 | train_stable=17.80% | eval_stable=21.00% | best_acc=26.00% (epoch 871)
+2026-11-24 11:53:52,191 - INFO - Epoch 0890 | train_loss=0.3434 | eval_loss=0.3556 | train_stable=18.80% | eval_stable=17.00% | best_acc=27.00% (epoch 882)
+2026-11-24 11:54:25,277 - INFO - Epoch 0900 | train_loss=0.3474 | eval_loss=0.3543 | train_stable=15.70% | eval_stable=15.00% | best_acc=27.00% (epoch 882)
+2026-11-24 11:54:56,903 - INFO - Epoch 0910 | train_loss=0.3455 | eval_loss=0.3555 | train_stable=18.40% | eval_stable=18.00% | best_acc=27.00% (epoch 882)
+2026-11-24 11:55:31,159 - INFO - Epoch 0920 | train_loss=0.3506 | eval_loss=0.3405 | train_stable=16.00% | eval_stable=18.00% | best_acc=27.00% (epoch 882)
+2026-11-24 11:56:07,411 - INFO - Epoch 0930 | train_loss=0.3432 | eval_loss=0.3539 | train_stable=17.80% | eval_stable=16.00% | best_acc=27.00% (epoch 882)
+2026-11-24 11:56:44,524 - INFO - Epoch 0940 | train_loss=0.3477 | eval_loss=0.3588 | train_stable=15.60% | eval_stable=20.00% | best_acc=27.00% (epoch 933)
+2026-11-24 11:57:21,400 - INFO - Epoch 0950 | train_loss=0.3482 | eval_loss=0.3456 | train_stable=16.90% | eval_stable=19.00% | best_acc=27.00% (epoch 949)
+2026-11-24 11:57:58,122 - INFO - Epoch 0960 | train_loss=0.3438 | eval_loss=0.3284 | train_stable=16.00% | eval_stable=22.00% | best_acc=27.00% (epoch 949)
+2026-11-24 11:58:35,118 - INFO - Epoch 0970 | train_loss=0.3461 | eval_loss=0.3492 | train_stable=18.20% | eval_stable=15.00% | best_acc=27.00% (epoch 949)
+2026-11-24 11:59:11,826 - INFO - Epoch 0980 | train_loss=0.3468 | eval_loss=0.3455 | train_stable=15.90% | eval_stable=16.00% | best_acc=27.00% (epoch 949)
+2026-11-24 11:59:48,593 - INFO - Epoch 0990 | train_loss=0.3456 | eval_loss=0.3358 | train_stable=17.70% | eval_stable=18.00% | best_acc=27.00% (epoch 949)
+2026-11-24 12:00:24,370 - INFO - Epoch 1000 | train_loss=0.3409 | eval_loss=0.3471 | train_stable=17.50% | eval_stable=18.00% | best_acc=27.00% (epoch 949)
+2026-11-24 12:00:24,512 - INFO - Training finished.
+2026-11-24 12:00:24,543 - INFO - Sample evaluation program:
+% Fully grounded coloring conditional on earlier neighbors
+color(7,1).
+bad :- not color(7,1), not color(7,2), not color(7,3), not bad.
+color(8,2).
+bad :- not color(8,1), not color(8,2), not color(8,3), not bad.
+color(17,3) :- color(7,1), color(8,2).
+bad :- not color(17,1), not color(17,2), not color(17,3), not bad.
+color(20,3) :- color(7,1), color(8,2).
+bad :- not color(20,1), not color(20,2), not color(20,3), not bad.
+color(5,3) :- color(8,2), color(20,1).
+color(5,1) :- color(8,2), color(20,3).
+bad :- not color(5,1), not color(5,2), not color(5,3), not bad.
+color(2,2) :- color(5,1), color(17,1), not color(2,3).
+color(2,3) :- color(5,1), color(17,1), not color(2,2).
+color(2,3) :- color(5,1), color(17,2).
+color(2,2) :- color(5,1), color(17,3).
+color(2,3) :- color(5,2), color(17,1).
+color(2,1) :- color(5,2), color(17,2), not color(2,3).
+color(2,3) :- color(5,2), color(17,2), not color(2,1).
+color(2,1) :- color(5,2), color(17,3).
+color(2,2) :- color(5,3), color(17,1).
+color(2,1) :- color(5,3), color(17,2).
+color(2,1) :- color(5,3), color(17,3), not color(2,2).
+color(2,2) :- color(5,3), color(17,3), not color(2,1).
+bad :- not color(2,1), not color(2,2), not color(2,3), not bad.
+color(11,2) :- color(2,1), color(20,1), not color(11,3).
+color(11,3) :- color(2,1), color(20,1), not color(11,2).
+color(11,3) :- color(2,1), color(20,2).
+color(11,2) :- color(2,1), color(20,3).
+color(11,3) :- color(2,2), color(20,1).
+color(11,1) :- color(2,2), color(20,2), not color(11,3).
+color(11,3) :- color(2,2), color(20,2), not color(11,1).
+color(11,1) :- color(2,2), color(20,3).
+color(11,2) :- color(2,3), color(20,1).
+color(11,1) :- color(2,3), color(20,2).
+color(11,1) :- color(2,3), color(20,3), not color(11,2).
+color(11,2) :- color(2,3), color(20,3), not color(11,1).
+bad :- not color(11,1), not color(11,2), not color(11,3), not bad.
+color(14,2) :- color(7,1), color(11,1), not color(14,3).
+color(14,3) :- color(7,1), color(11,1), not color(14,2).
+color(14,3) :- color(7,1), color(11,2).
+color(14,2) :- color(7,1), color(11,3).
+bad :- not color(14,1), not color(14,2), not color(14,3), not bad.
+color(9,3) :- color(8,2), color(14,1).
+color(9,1) :- color(8,2), color(14,2), not color(9,3).
+color(9,3) :- color(8,2), color(14,2), not color(9,1).
+color(9,1) :- color(8,2), color(14,3).
+bad :- not color(9,1), not color(9,2), not color(9,3), not bad.
+color(21,2) :- color(7,1), color(9,1), not color(21,3).
+color(21,3) :- color(7,1), color(9,1), not color(21,2).
+color(21,3) :- color(7,1), color(9,2).
+color(21,2) :- color(7,1), color(9,3).
+bad :- not color(21,1), not color(21,2), not color(21,3), not bad.
+color(1,2) :- color(14,1), color(21,1), not color(1,3).
+color(1,3) :- color(14,1), color(21,1), not color(1,2).
+color(1,3) :- color(14,1), color(21,2).
+color(1,2) :- color(14,1), color(21,3).
+color(1,3) :- color(14,2), color(21,1).
+color(1,1) :- color(14,2), color(21,2), not color(1,3).
+color(1,3) :- color(14,2), color(21,2), not color(1,1).
+color(1,1) :- color(14,2), color(21,3).
+color(1,2) :- color(14,3), color(21,1).
+color(1,1) :- color(14,3), color(21,2).
+color(1,1) :- color(14,3), color(21,3), not color(1,2).
+color(1,2) :- color(14,3), color(21,3), not color(1,1).
+bad :- not color(1,1), not color(1,2), not color(1,3), not bad.
+color(3,2) :- color(1,1), color(11,1), not color(3,3).
+color(3,3) :- color(1,1), color(11,1), not color(3,2).
+color(3,3) :- color(1,1), color(11,2).
+color(3,2) :- color(1,1), color(11,3).
+color(3,3) :- color(1,2), color(11,1).
+color(3,1) :- color(1,2), color(11,2), not color(3,3).
+color(3,3) :- color(1,2), color(11,2), not color(3,1).
+color(3,1) :- color(1,2), color(11,3).
+color(3,2) :- color(1,3), color(11,1).
+color(3,1) :- color(1,3), color(11,2).
+color(3,1) :- color(1,3), color(11,3), not color(3,2).
+color(3,2) :- color(1,3), color(11,3), not color(3,1).
+bad :- not color(3,1), not color(3,2), not color(3,3), not bad.
+color(13,2) :- color(3,1), color(14,1), not color(13,3).
+color(13,3) :- color(3,1), color(14,1), not color(13,2).
+color(13,3) :- color(3,1), color(14,2).
+color(13,2) :- color(3,1), color(14,3).
+color(13,3) :- color(3,2), color(14,1).
+color(13,1) :- color(3,2), color(14,2), not color(13,3).
+color(13,3) :- color(3,2), color(14,2), not color(13,1).
+color(13,1) :- color(3,2), color(14,3).
+color(13,2) :- color(3,3), color(14,1).
+color(13,1) :- color(3,3), color(14,2).
+color(13,1) :- color(3,3), color(14,3), not color(13,2).
+color(13,2) :- color(3,3), color(14,3), not color(13,1).
+bad :- not color(13,1), not color(13,2), not color(13,3), not bad.
+color(16,3) :- color(1,1), color(21,2).
+color(16,2) :- color(1,1), color(21,3).
+color(16,3) :- color(1,2), color(21,1).
+color(16,1) :- color(1,2), color(21,3).
+color(16,2) :- color(1,3), color(21,1).
+color(16,1) :- color(1,3), color(21,2).
+bad :- not color(16,1), not color(16,2), not color(16,3), not bad.
+color(22,2) :- color(11,1), color(13,1), not color(22,3).
+color(22,3) :- color(11,1), color(13,1), not color(22,2).
+color(22,3) :- color(11,1), color(13,2).
+color(22,2) :- color(11,1), color(13,3).
+color(22,3) :- color(11,2), color(13,1).
+color(22,1) :- color(11,2), color(13,2), not color(22,3).
+color(22,3) :- color(11,2), color(13,2), not color(22,1).
+color(22,1) :- color(11,2), color(13,3).
+color(22,2) :- color(11,3), color(13,1).
+color(22,1) :- color(11,3), color(13,2).
+color(22,1) :- color(11,3), color(13,3), not color(22,2).
+color(22,2) :- color(11,3), color(13,3), not color(22,1).
+bad :- not color(22,1), not color(22,2), not color(22,3), not bad.
+color(6,2) :- color(3,1), color(22,1), not color(6,3).
+color(6,3) :- color(3,1), color(22,1), not color(6,2).
+color(6,3) :- color(3,1), color(22,2).
+color(6,2) :- color(3,1), color(22,3).
+color(6,3) :- color(3,2), color(22,1).
+color(6,1) :- color(3,2), color(22,2), not color(6,3).
+color(6,3) :- color(3,2), color(22,2), not color(6,1).
+color(6,1) :- color(3,2), color(22,3).
+color(6,2) :- color(3,3), color(22,1).
+color(6,1) :- color(3,3), color(22,2).
+color(6,1) :- color(3,3), color(22,3), not color(6,2).
+color(6,2) :- color(3,3), color(22,3), not color(6,1).
+bad :- not color(6,1), not color(6,2), not color(6,3), not bad.
+color(10,2) :- color(13,1), color(16,1), not color(10,3).
+color(10,3) :- color(13,1), color(16,1), not color(10,2).
+color(10,3) :- color(13,1), color(16,2).
+color(10,2) :- color(13,1), color(16,3).
+color(10,3) :- color(13,2), color(16,1).
+color(10,1) :- color(13,2), color(16,2), not color(10,3).
+color(10,3) :- color(13,2), color(16,2), not color(10,1).
+color(10,1) :- color(13,2), color(16,3).
+color(10,2) :- color(13,3), color(16,1).
+color(10,1) :- color(13,3), color(16,2).
+color(10,1) :- color(13,3), color(16,3), not color(10,2).
+color(10,2) :- color(13,3), color(16,3), not color(10,1).
+bad :- not color(10,1), not color(10,2), not color(10,3), not bad.
+color(12,2) :- color(6,1), color(17,1), not color(12,3).
+color(12,3) :- color(6,1), color(17,1), not color(12,2).
+color(12,3) :- color(6,1), color(17,2).
+color(12,2) :- color(6,1), color(17,3).
+color(12,3) :- color(6,2), color(17,1).
+color(12,1) :- color(6,2), color(17,2), not color(12,3).
+color(12,3) :- color(6,2), color(17,2), not color(12,1).
+color(12,1) :- color(6,2), color(17,3).
+color(12,2) :- color(6,3), color(17,1).
+color(12,1) :- color(6,3), color(17,2).
+color(12,1) :- color(6,3), color(17,3), not color(12,2).
+color(12,2) :- color(6,3), color(17,3), not color(12,1).
+bad :- not color(12,1), not color(12,2), not color(12,3), not bad.
+color(19,2) :- color(6,1), color(21,1), not color(19,3).
+color(19,3) :- color(6,1), color(21,1), not color(19,2).
+color(19,3) :- color(6,1), color(21,2).
+color(19,2) :- color(6,1), color(21,3).
+color(19,3) :- color(6,2), color(21,1).
+color(19,1) :- color(6,2), color(21,2), not color(19,3).
+color(19,3) :- color(6,2), color(21,2), not color(19,1).
+color(19,1) :- color(6,2), color(21,3).
+color(19,2) :- color(6,3), color(21,1).
+color(19,1) :- color(6,3), color(21,2).
+color(19,1) :- color(6,3), color(21,3), not color(19,2).
+color(19,2) :- color(6,3), color(21,3), not color(19,1).
+bad :- not color(19,1), not color(19,2), not color(19,3), not bad.
+color(15,2) :- color(2,1), not color(15,3).
+color(15,3) :- color(2,1), not color(15,2).
+color(15,1) :- color(2,2), not color(15,3).
+color(15,3) :- color(2,2), not color(15,1).
+color(15,1) :- color(2,3), not color(15,2).
+color(15,2) :- color(2,3), not color(15,1).
+bad :- not color(15,1), not color(15,2), not color(15,3), not bad.
+color(18,2) :- color(15,1), color(21,1), not color(18,3).
+color(18,3) :- color(15,1), color(21,1), not color(18,2).
+color(18,3) :- color(15,1), color(21,2).
+color(18,2) :- color(15,1), color(21,3).
+color(18,3) :- color(15,2), color(21,1).
+color(18,1) :- color(15,2), color(21,2), not color(18,3).
+color(18,3) :- color(15,2), color(21,2), not color(18,1).
+color(18,1) :- color(15,2), color(21,3).
+color(18,2) :- color(15,3), color(21,1).
+color(18,1) :- color(15,3), color(21,2).
+color(18,1) :- color(15,3), color(21,3), not color(18,2).
+color(18,2) :- color(15,3), color(21,3), not color(18,1).
+bad :- not color(18,1), not color(18,2), not color(18,3), not bad.
+color(4,2) :- color(17,1), not color(4,3).
+color(4,3) :- color(17,1), not color(4,2).
+color(4,1) :- color(17,2), not color(4,3).
+color(4,3) :- color(17,2), not color(4,1).
+color(4,1) :- color(17,3), not color(4,2).
+color(4,2) :- color(17,3), not color(4,1).
+bad :- not color(4,1), not color(4,2), not color(4,3), not bad.
+2026-11-24 12:00:24,543 - INFO - Actual answer set: ['color(1,1)', 'color(10,1)', 'color(11,1)', 'color(12,2)', 'color(13,3)', 'color(14,2)', 'color(15,1)', 'color(16,2)', 'color(17,3)', 'color(18,2)', 'color(19,2)', 'color(2,2)', 'color(20,3)', 'color(21,3)', 'color(22,2)', 'color(3,2)', 'color(4,1)', 'color(5,1)', 'color(6,3)', 'color(7,1)', 'color(8,2)', 'color(9,1)']
+2026-11-24 12:00:24,543 - INFO - Predicted answer set: ['color(1,1)', 'color(10,2)', 'color(11,1)', 'color(12,2)', 'color(13,1)', 'color(14,3)', 'color(15,3)', 'color(16,3)', 'color(17,3)', 'color(18,1)', 'color(19,3)', 'color(2,2)', 'color(20,3)', 'color(21,2)', 'color(22,3)', 'color(3,2)', 'color(4,1)', 'color(5,1)', 'color(6,1)', 'color(7,1)', 'color(8,2)', 'color(9,1)']
+2026-11-24 12:00:24,543 - INFO - Exact match: False

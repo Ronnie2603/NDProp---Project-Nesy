@@ -1,0 +1,5 @@
+Best Model Summary
+- Best accuracy: 27.00%
+- Best epoch: 949
+- Checkpoint: best.pt
+- Metrics logfile: metrics.csv

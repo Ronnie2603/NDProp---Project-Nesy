@@ -1,0 +1,416 @@
+{
+  "epoch": 1000,
+  "count": 82,
+  "problems": [
+    {
+      "index": 0,
+      "label": "Program_1",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0001.lp"
+    },
+    {
+      "index": 1,
+      "label": "Program_2",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0002.lp"
+    },
+    {
+      "index": 2,
+      "label": "Program_3",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0003.lp"
+    },
+    {
+      "index": 3,
+      "label": "Program_4",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0004.lp"
+    },
+    {
+      "index": 4,
+      "label": "Program_5",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0005.lp"
+    },
+    {
+      "index": 5,
+      "label": "Program_6",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0006.lp"
+    },
+    {
+      "index": 6,
+      "label": "Program_7",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0007.lp"
+    },
+    {
+      "index": 7,
+      "label": "Program_8",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0008.lp"
+    },
+    {
+      "index": 8,
+      "label": "Program_9",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0009.lp"
+    },
+    {
+      "index": 9,
+      "label": "Program_10",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0010.lp"
+    },
+    {
+      "index": 11,
+      "label": "Program_12",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0012.lp"
+    },
+    {
+      "index": 12,
+      "label": "Program_13",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0013.lp"
+    },
+    {
+      "index": 13,
+      "label": "Program_14",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0014.lp"
+    },
+    {
+      "index": 14,
+      "label": "Program_15",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0015.lp"
+    },
+    {
+      "index": 15,
+      "label": "Program_16",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0016.lp"
+    },
+    {
+      "index": 16,
+      "label": "Program_17",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0017.lp"
+    },
+    {
+      "index": 17,
+      "label": "Program_18",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0018.lp"
+    },
+    {
+      "index": 18,
+      "label": "Program_19",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0019.lp"
+    },
+    {
+      "index": 20,
+      "label": "Program_21",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0021.lp"
+    },
+    {
+      "index": 21,
+      "label": "Program_22",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0022.lp"
+    },
+    {
+      "index": 22,
+      "label": "Program_23",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0023.lp"
+    },
+    {
+      "index": 23,
+      "label": "Program_24",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0024.lp"
+    },
+    {
+      "index": 24,
+      "label": "Program_25",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0038_sat_0025.lp"
+    },
+    {
+      "index": 25,
+      "label": "Program_26",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0001.lp"
+    },
+    {
+      "index": 26,
+      "label": "Program_27",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0002.lp"
+    },
+    {
+      "index": 27,
+      "label": "Program_28",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0003.lp"
+    },
+    {
+      "index": 28,
+      "label": "Program_29",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0004.lp"
+    },
+    {
+      "index": 29,
+      "label": "Program_30",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0005.lp"
+    },
+    {
+      "index": 30,
+      "label": "Program_31",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0006.lp"
+    },
+    {
+      "index": 31,
+      "label": "Program_32",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0007.lp"
+    },
+    {
+      "index": 32,
+      "label": "Program_33",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0008.lp"
+    },
+    {
+      "index": 33,
+      "label": "Program_34",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0009.lp"
+    },
+    {
+      "index": 34,
+      "label": "Program_35",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0010.lp"
+    },
+    {
+      "index": 36,
+      "label": "Program_37",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0012.lp"
+    },
+    {
+      "index": 37,
+      "label": "Program_38",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0013.lp"
+    },
+    {
+      "index": 38,
+      "label": "Program_39",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0014.lp"
+    },
+    {
+      "index": 40,
+      "label": "Program_41",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0016.lp"
+    },
+    {
+      "index": 41,
+      "label": "Program_42",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0017.lp"
+    },
+    {
+      "index": 42,
+      "label": "Program_43",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0018.lp"
+    },
+    {
+      "index": 43,
+      "label": "Program_44",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0019.lp"
+    },
+    {
+      "index": 44,
+      "label": "Program_45",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0020.lp"
+    },
+    {
+      "index": 45,
+      "label": "Program_46",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0021.lp"
+    },
+    {
+      "index": 46,
+      "label": "Program_47",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0022.lp"
+    },
+    {
+      "index": 47,
+      "label": "Program_48",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0023.lp"
+    },
+    {
+      "index": 48,
+      "label": "Program_49",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0024.lp"
+    },
+    {
+      "index": 49,
+      "label": "Program_50",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0039_sat_0025.lp"
+    },
+    {
+      "index": 50,
+      "label": "Program_51",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0040_sat_0001.lp"
+    },
+    {
+      "index": 52,
+      "label": "Program_53",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0040_sat_0003.lp"
+    },
+    {
+      "index": 53,
+      "label": "Program_54",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0040_sat_0004.lp"
+    },
+    {
+      "index": 55,
+      "label": "Program_56",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0040_sat_0006.lp"
+    },
+    {
+      "index": 56,
+      "label": "Program_57",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0040_sat_0007.lp"
+    },
+    {
+      "index": 57,
+      "label": "Program_58",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0040_sat_0008.lp"
+    },
+    {
+      "index": 58,
+      "label": "Program_59",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0040_sat_0009.lp"
+    },
+    {
+      "index": 59,
+      "label": "Program_60",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0040_sat_0010.lp"
+    },
+    {
+      "index": 60,
+      "label": "Program_61",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0040_sat_0011.lp"
+    },
+    {
+      "index": 61,
+      "label": "Program_62",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0040_sat_0012.lp"
+    },
+    {
+      "index": 62,
+      "label": "Program_63",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0040_sat_0013.lp"
+    },
+    {
+      "index": 63,
+      "label": "Program_64",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0040_sat_0014.lp"
+    },
+    {
+      "index": 65,
+      "label": "Program_66",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0040_sat_0016.lp"
+    },
+    {
+      "index": 66,
+      "label": "Program_67",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0040_sat_0017.lp"
+    },
+    {
+      "index": 68,
+      "label": "Program_69",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0040_sat_0019.lp"
+    },
+    {
+      "index": 69,
+      "label": "Program_70",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0040_sat_0020.lp"
+    },
+    {
+      "index": 70,
+      "label": "Program_71",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0040_sat_0021.lp"
+    },
+    {
+      "index": 71,
+      "label": "Program_72",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0040_sat_0022.lp"
+    },
+    {
+      "index": 72,
+      "label": "Program_73",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0040_sat_0023.lp"
+    },
+    {
+      "index": 74,
+      "label": "Program_75",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0040_sat_0025.lp"
+    },
+    {
+      "index": 78,
+      "label": "Program_79",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0041_sat_0004.lp"
+    },
+    {
+      "index": 79,
+      "label": "Program_80",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0041_sat_0005.lp"
+    },
+    {
+      "index": 80,
+      "label": "Program_81",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0041_sat_0006.lp"
+    },
+    {
+      "index": 84,
+      "label": "Program_85",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0041_sat_0010.lp"
+    },
+    {
+      "index": 85,
+      "label": "Program_86",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0041_sat_0011.lp"
+    },
+    {
+      "index": 87,
+      "label": "Program_88",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0041_sat_0013.lp"
+    },
+    {
+      "index": 88,
+      "label": "Program_89",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0041_sat_0014.lp"
+    },
+    {
+      "index": 89,
+      "label": "Program_90",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0041_sat_0015.lp"
+    },
+    {
+      "index": 90,
+      "label": "Program_91",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0041_sat_0016.lp"
+    },
+    {
+      "index": 91,
+      "label": "Program_92",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0041_sat_0017.lp"
+    },
+    {
+      "index": 92,
+      "label": "Program_93",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0041_sat_0018.lp"
+    },
+    {
+      "index": 94,
+      "label": "Program_95",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0041_sat_0020.lp"
+    },
+    {
+      "index": 95,
+      "label": "Program_96",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0041_sat_0021.lp"
+    },
+    {
+      "index": 96,
+      "label": "Program_97",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0041_sat_0022.lp"
+    },
+    {
+      "index": 97,
+      "label": "Program_98",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0041_sat_0023.lp"
+    },
+    {
+      "index": 98,
+      "label": "Program_99",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/graph_coloring_ordered_anchored/val/easy/easy_val_0041_sat_0024.lp"
+    }
+  ]
+}

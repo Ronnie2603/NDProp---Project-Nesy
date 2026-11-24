@@ -1,0 +1,196 @@
+Program:
+% Fully grounded coloring conditional on earlier neighbors
+color(7,1).
+bad :- not color(7,1), not color(7,2), not color(7,3), not bad.
+color(8,2).
+bad :- not color(8,1), not color(8,2), not color(8,3), not bad.
+color(17,3) :- color(7,1), color(8,2).
+bad :- not color(17,1), not color(17,2), not color(17,3), not bad.
+color(20,3) :- color(7,1), color(8,2).
+bad :- not color(20,1), not color(20,2), not color(20,3), not bad.
+color(5,3) :- color(8,2), color(20,1).
+color(5,1) :- color(8,2), color(20,3).
+bad :- not color(5,1), not color(5,2), not color(5,3), not bad.
+color(2,2) :- color(5,1), color(17,1), not color(2,3).
+color(2,3) :- color(5,1), color(17,1), not color(2,2).
+color(2,3) :- color(5,1), color(17,2).
+color(2,2) :- color(5,1), color(17,3).
+color(2,3) :- color(5,2), color(17,1).
+color(2,1) :- color(5,2), color(17,2), not color(2,3).
+color(2,3) :- color(5,2), color(17,2), not color(2,1).
+color(2,1) :- color(5,2), color(17,3).
+color(2,2) :- color(5,3), color(17,1).
+color(2,1) :- color(5,3), color(17,2).
+color(2,1) :- color(5,3), color(17,3), not color(2,2).
+color(2,2) :- color(5,3), color(17,3), not color(2,1).
+bad :- not color(2,1), not color(2,2), not color(2,3), not bad.
+color(11,2) :- color(2,1), color(20,1), not color(11,3).
+color(11,3) :- color(2,1), color(20,1), not color(11,2).
+color(11,3) :- color(2,1), color(20,2).
+color(11,2) :- color(2,1), color(20,3).
+color(11,3) :- color(2,2), color(20,1).
+color(11,1) :- color(2,2), color(20,2), not color(11,3).
+color(11,3) :- color(2,2), color(20,2), not color(11,1).
+color(11,1) :- color(2,2), color(20,3).
+color(11,2) :- color(2,3), color(20,1).
+color(11,1) :- color(2,3), color(20,2).
+color(11,1) :- color(2,3), color(20,3), not color(11,2).
+color(11,2) :- color(2,3), color(20,3), not color(11,1).
+bad :- not color(11,1), not color(11,2), not color(11,3), not bad.
+color(14,2) :- color(7,1), color(11,1), not color(14,3).
+color(14,3) :- color(7,1), color(11,1), not color(14,2).
+color(14,3) :- color(7,1), color(11,2).
+color(14,2) :- color(7,1), color(11,3).
+bad :- not color(14,1), not color(14,2), not color(14,3), not bad.
+color(9,3) :- color(8,2), color(14,1).
+color(9,1) :- color(8,2), color(14,2), not color(9,3).
+color(9,3) :- color(8,2), color(14,2), not color(9,1).
+color(9,1) :- color(8,2), color(14,3).
+bad :- not color(9,1), not color(9,2), not color(9,3), not bad.
+color(21,2) :- color(7,1), color(9,1), not color(21,3).
+color(21,3) :- color(7,1), color(9,1), not color(21,2).
+color(21,3) :- color(7,1), color(9,2).
+color(21,2) :- color(7,1), color(9,3).
+bad :- not color(21,1), not color(21,2), not color(21,3), not bad.
+color(1,2) :- color(14,1), color(21,1), not color(1,3).
+color(1,3) :- color(14,1), color(21,1), not color(1,2).
+color(1,3) :- color(14,1), color(21,2).
+color(1,2) :- color(14,1), color(21,3).
+color(1,3) :- color(14,2), color(21,1).
+color(1,1) :- color(14,2), color(21,2), not color(1,3).
+color(1,3) :- color(14,2), color(21,2), not color(1,1).
+color(1,1) :- color(14,2), color(21,3).
+color(1,2) :- color(14,3), color(21,1).
+color(1,1) :- color(14,3), color(21,2).
+color(1,1) :- color(14,3), color(21,3), not color(1,2).
+color(1,2) :- color(14,3), color(21,3), not color(1,1).
+bad :- not color(1,1), not color(1,2), not color(1,3), not bad.
+color(3,2) :- color(1,1), color(11,1), not color(3,3).
+color(3,3) :- color(1,1), color(11,1), not color(3,2).
+color(3,3) :- color(1,1), color(11,2).
+color(3,2) :- color(1,1), color(11,3).
+color(3,3) :- color(1,2), color(11,1).
+color(3,1) :- color(1,2), color(11,2), not color(3,3).
+color(3,3) :- color(1,2), color(11,2), not color(3,1).
+color(3,1) :- color(1,2), color(11,3).
+color(3,2) :- color(1,3), color(11,1).
+color(3,1) :- color(1,3), color(11,2).
+color(3,1) :- color(1,3), color(11,3), not color(3,2).
+color(3,2) :- color(1,3), color(11,3), not color(3,1).
+bad :- not color(3,1), not color(3,2), not color(3,3), not bad.
+color(13,2) :- color(3,1), color(14,1), not color(13,3).
+color(13,3) :- color(3,1), color(14,1), not color(13,2).
+color(13,3) :- color(3,1), color(14,2).
+color(13,2) :- color(3,1), color(14,3).
+color(13,3) :- color(3,2), color(14,1).
+color(13,1) :- color(3,2), color(14,2), not color(13,3).
+color(13,3) :- color(3,2), color(14,2), not color(13,1).
+color(13,1) :- color(3,2), color(14,3).
+color(13,2) :- color(3,3), color(14,1).
+color(13,1) :- color(3,3), color(14,2).
+color(13,1) :- color(3,3), color(14,3), not color(13,2).
+color(13,2) :- color(3,3), color(14,3), not color(13,1).
+bad :- not color(13,1), not color(13,2), not color(13,3), not bad.
+color(16,3) :- color(1,1), color(21,2).
+color(16,2) :- color(1,1), color(21,3).
+color(16,3) :- color(1,2), color(21,1).
+color(16,1) :- color(1,2), color(21,3).
+color(16,2) :- color(1,3), color(21,1).
+color(16,1) :- color(1,3), color(21,2).
+bad :- not color(16,1), not color(16,2), not color(16,3), not bad.
+color(22,2) :- color(11,1), color(13,1), not color(22,3).
+color(22,3) :- color(11,1), color(13,1), not color(22,2).
+color(22,3) :- color(11,1), color(13,2).
+color(22,2) :- color(11,1), color(13,3).
+color(22,3) :- color(11,2), color(13,1).
+color(22,1) :- color(11,2), color(13,2), not color(22,3).
+color(22,3) :- color(11,2), color(13,2), not color(22,1).
+color(22,1) :- color(11,2), color(13,3).
+color(22,2) :- color(11,3), color(13,1).
+color(22,1) :- color(11,3), color(13,2).
+color(22,1) :- color(11,3), color(13,3), not color(22,2).
+color(22,2) :- color(11,3), color(13,3), not color(22,1).
+bad :- not color(22,1), not color(22,2), not color(22,3), not bad.
+color(6,2) :- color(3,1), color(22,1), not color(6,3).
+color(6,3) :- color(3,1), color(22,1), not color(6,2).
+color(6,3) :- color(3,1), color(22,2).
+color(6,2) :- color(3,1), color(22,3).
+color(6,3) :- color(3,2), color(22,1).
+color(6,1) :- color(3,2), color(22,2), not color(6,3).
+color(6,3) :- color(3,2), color(22,2), not color(6,1).
+color(6,1) :- color(3,2), color(22,3).
+color(6,2) :- color(3,3), color(22,1).
+color(6,1) :- color(3,3), color(22,2).
+color(6,1) :- color(3,3), color(22,3), not color(6,2).
+color(6,2) :- color(3,3), color(22,3), not color(6,1).
+bad :- not color(6,1), not color(6,2), not color(6,3), not bad.
+color(10,2) :- color(13,1), color(16,1), not color(10,3).
+color(10,3) :- color(13,1), color(16,1), not color(10,2).
+color(10,3) :- color(13,1), color(16,2).
+color(10,2) :- color(13,1), color(16,3).
+color(10,3) :- color(13,2), color(16,1).
+color(10,1) :- color(13,2), color(16,2), not color(10,3).
+color(10,3) :- color(13,2), color(16,2), not color(10,1).
+color(10,1) :- color(13,2), color(16,3).
+color(10,2) :- color(13,3), color(16,1).
+color(10,1) :- color(13,3), color(16,2).
+color(10,1) :- color(13,3), color(16,3), not color(10,2).
+color(10,2) :- color(13,3), color(16,3), not color(10,1).
+bad :- not color(10,1), not color(10,2), not color(10,3), not bad.
+color(12,2) :- color(6,1), color(17,1), not color(12,3).
+color(12,3) :- color(6,1), color(17,1), not color(12,2).
+color(12,3) :- color(6,1), color(17,2).
+color(12,2) :- color(6,1), color(17,3).
+color(12,3) :- color(6,2), color(17,1).
+color(12,1) :- color(6,2), color(17,2), not color(12,3).
+color(12,3) :- color(6,2), color(17,2), not color(12,1).
+color(12,1) :- color(6,2), color(17,3).
+color(12,2) :- color(6,3), color(17,1).
+color(12,1) :- color(6,3), color(17,2).
+color(12,1) :- color(6,3), color(17,3), not color(12,2).
+color(12,2) :- color(6,3), color(17,3), not color(12,1).
+bad :- not color(12,1), not color(12,2), not color(12,3), not bad.
+color(19,2) :- color(6,1), color(21,1), not color(19,3).
+color(19,3) :- color(6,1), color(21,1), not color(19,2).
+color(19,3) :- color(6,1), color(21,2).
+color(19,2) :- color(6,1), color(21,3).
+color(19,3) :- color(6,2), color(21,1).
+color(19,1) :- color(6,2), color(21,2), not color(19,3).
+color(19,3) :- color(6,2), color(21,2), not color(19,1).
+color(19,1) :- color(6,2), color(21,3).
+color(19,2) :- color(6,3), color(21,1).
+color(19,1) :- color(6,3), color(21,2).
+color(19,1) :- color(6,3), color(21,3), not color(19,2).
+color(19,2) :- color(6,3), color(21,3), not color(19,1).
+bad :- not color(19,1), not color(19,2), not color(19,3), not bad.
+color(15,2) :- color(2,1), not color(15,3).
+color(15,3) :- color(2,1), not color(15,2).
+color(15,1) :- color(2,2), not color(15,3).
+color(15,3) :- color(2,2), not color(15,1).
+color(15,1) :- color(2,3), not color(15,2).
+color(15,2) :- color(2,3), not color(15,1).
+bad :- not color(15,1), not color(15,2), not color(15,3), not bad.
+color(18,2) :- color(15,1), color(21,1), not color(18,3).
+color(18,3) :- color(15,1), color(21,1), not color(18,2).
+color(18,3) :- color(15,1), color(21,2).
+color(18,2) :- color(15,1), color(21,3).
+color(18,3) :- color(15,2), color(21,1).
+color(18,1) :- color(15,2), color(21,2), not color(18,3).
+color(18,3) :- color(15,2), color(21,2), not color(18,1).
+color(18,1) :- color(15,2), color(21,3).
+color(18,2) :- color(15,3), color(21,1).
+color(18,1) :- color(15,3), color(21,2).
+color(18,1) :- color(15,3), color(21,3), not color(18,2).
+color(18,2) :- color(15,3), color(21,3), not color(18,1).
+bad :- not color(18,1), not color(18,2), not color(18,3), not bad.
+color(4,2) :- color(17,1), not color(4,3).
+color(4,3) :- color(17,1), not color(4,2).
+color(4,1) :- color(17,2), not color(4,3).
+color(4,3) :- color(17,2), not color(4,1).
+color(4,1) :- color(17,3), not color(4,2).
+color(4,2) :- color(17,3), not color(4,1).
+bad :- not color(4,1), not color(4,2), not color(4,3), not bad.
+
+Actual answer set: ['color(1,1)', 'color(10,1)', 'color(11,1)', 'color(12,2)', 'color(13,3)', 'color(14,2)', 'color(15,1)', 'color(16,2)', 'color(17,3)', 'color(18,2)', 'color(19,2)', 'color(2,2)', 'color(20,3)', 'color(21,3)', 'color(22,2)', 'color(3,2)', 'color(4,1)', 'color(5,1)', 'color(6,3)', 'color(7,1)', 'color(8,2)', 'color(9,1)']
+Predicted answer set: ['color(1,1)', 'color(10,2)', 'color(11,1)', 'color(12,2)', 'color(13,1)', 'color(14,3)', 'color(15,3)', 'color(16,3)', 'color(17,3)', 'color(18,1)', 'color(19,3)', 'color(2,2)', 'color(20,3)', 'color(21,2)', 'color(22,3)', 'color(3,2)', 'color(4,1)', 'color(5,1)', 'color(6,1)', 'color(7,1)', 'color(8,2)', 'color(9,1)']
+Exact match: False
