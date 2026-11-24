@@ -1,0 +1,16 @@
+{
+  "epoch": 1000,
+  "count": 2,
+  "problems": [
+    {
+      "index": 6,
+      "label": "Program_7",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_easy/val_easy_00006.lp"
+    },
+    {
+      "index": 54,
+      "label": "Program_55",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_easy/val_easy_00054.lp"
+    }
+  ]
+}

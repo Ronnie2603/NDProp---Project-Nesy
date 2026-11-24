@@ -1,0 +1,19 @@
+method,difficulty,accuracy
+NDProp train easy,Easy,1.000000
+NDProp train easy,Medium,0.700000
+NDProp train easy,Hard,0.160000
+NDProp train medium,Easy,1.000000
+NDProp train medium,Medium,0.800000
+NDProp train medium,Hard,0.390000
+Random,Easy,0.410000
+Random,Medium,0.010000
+Random,Hard,0.000000
+RDProp-1,Easy,0.050000
+RDProp-1,Medium,0.010000
+RDProp-1,Hard,0.000000
+RDProp-10,Easy,0.490000
+RDProp-10,Medium,0.020000
+RDProp-10,Hard,0.000000
+RDProp-100,Easy,0.950000
+RDProp-100,Medium,0.130000
+RDProp-100,Hard,0.000000

@@ -1,0 +1,140 @@
+Program:
+a23 :- a13, a14.
+a27 :- a2, not a24.
+a7 :- a21, not a24.
+a4 :- a25, not a19.
+a16 :- a17, not a4.
+a27 :- a21, not a2.
+a12 :- not a5, not a26.
+a18 :- a24, not a16.
+a19 :- a11, not a9.
+a5 :- a14, a17.
+a3 :- a10, not a4.
+a24 :- not a11, not a20.
+a11 :- a14, a22.
+a15 :- a12, not a6.
+a18 :- not a15, not a17.
+a17 :- a24, not a23.
+a19 :- a6, not a14.
+a14 :- not a25, not a26.
+a17 :- a2, a16.
+a6 :- a6, a12.
+a21 :- not a9, not a15.
+a14 :- a3, a23.
+a15 :- a25, not a6.
+a5 :- a16, not a10.
+a17 :- a1, not a26.
+a14 :- a4, not a24.
+a24 :- a6, a23.
+a11 :- a4, not a7.
+a1 :- not a5, not a25.
+a3 :- a4, not a1.
+a22 :- a2, a16.
+a6 :- a8, not a12.
+a25 :- a7, not a24.
+a3 :- a17, a27.
+a12 :- a13, not a15.
+a25 :- a15, not a21.
+a19 :- a15, a27.
+a23 :- a22, not a11.
+a18 :- a11, a24.
+a19 :- a6, not a26.
+a23 :- a16, not a13.
+a20 :- a7, not a2.
+a7 :- a19, not a8.
+a27 :- a2, a15.
+a24 :- a5, a8.
+a25 :- a15, not a5.
+a17 :- a12, not a23.
+a13 :- a3, a8.
+a4 :- a17, a20.
+a11 :- a9, not a7.
+a19 :- a1, not a13.
+a15 :- a2, not a3.
+a3 :- a19, not a3.
+a7 :- a4, a21.
+a24 :- a6, not a10.
+a11 :- a14, not a8.
+a13 :- a19, not a8.
+a15 :- a22, not a2.
+a4 :- not a12, not a21.
+a10 :- a9, not a6.
+a25 :- not a11, not a26.
+a9 :- a17, not a10.
+a16 :- a10, a11.
+a13 :- not a6, not a18.
+a4 :- not a9, not a12.
+a12 :- a23, not a9.
+a17 :- not a13, not a21.
+a5 :- a4, not a6.
+a14 :- a9, not a21.
+a18 :- a21, a22.
+a10 :- not a3, not a12.
+a13 :- a5, not a19.
+a15 :- a5, a10.
+a19 :- a3, not a7.
+a8 :- a21, not a4.
+a27 :- not a4, not a20.
+a25 :- a14, a19.
+a5 :- not a13, not a22.
+a1 :- a8, not a12.
+a17 :- a11, not a21.
+a26 :- a25, not a18.
+a13 :- a3, a22.
+a27 :- a15, not a3.
+a27 :- not a4, not a9.
+a13 :- a24, a26.
+a26 :- a18, not a11.
+a19 :- not a2, not a22.
+a5 :- a11, not a19.
+a20 :- a15, not a16.
+a2 :- not a5, not a8.
+a6 :- not a11, not a17.
+a16 :- a22, not a23.
+a2 :- a8, a17.
+a11 :- a7, not a16.
+a26 :- a23, not a10.
+a4 :- a6, a13.
+a4 :- a10, a13.
+a1 :- not a4, not a10.
+a13 :- a24, not a7.
+a3 :- a1, not a12.
+a5 :- a18, not a3.
+a27 :- a17, a26.
+a24 :- a5, a26.
+a26 :- a22, a24.
+a2 :- a13, a24.
+a10 :- a19, a25.
+a17 :- a10, not a13.
+a18 :- a1, not a23.
+a4 :- a3, a11.
+a3 :- a11, not a13.
+a24 :- a26, not a17.
+a16 :- a5, a27.
+a2 :- not a3, not a25.
+a17 :- a15, not a12.
+a25 :- a10, a12.
+a7 :- a16, not a13.
+a2 :- not a14, not a21.
+a18 :- a7, not a26.
+a10 :- a8, a13.
+a5 :- a2, not a24.
+a21 :- a3, not a11.
+a16 :- not a4, not a16.
+a8 :- not a3, not a14.
+a2 :- not a10, not a24.
+a14 :- a2, not a7.
+a26 :- a11, not a6.
+a1 :- not a13, not a17.
+a14 :- not a8, not a9.
+a10 :- not a8, not a24.
+a3 :- a20, not a1.
+a7 :- a22, not a26.
+a16 :- a22, not a18.
+a18 :- not a7, not a10.
+a1 :- a8, a14.
+a3 :- a20, not a16.
+
+Actual answer set: ['a10', 'a11', 'a12', 'a13', 'a14', 'a15', 'a16', 'a17', 'a18', 'a19', 'a2', 'a22', 'a23', 'a24', 'a25', 'a26', 'a27', 'a3', 'a4', 'a5', 'a7']
+Predicted answer set: ['a10', 'a11', 'a12', 'a13', 'a14', 'a15', 'a16', 'a17', 'a18', 'a19', 'a2', 'a22', 'a23', 'a24', 'a25', 'a26', 'a27', 'a3', 'a4', 'a5', 'a7']
+Exact match: True

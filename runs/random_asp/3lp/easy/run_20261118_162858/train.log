@@ -1,0 +1,165 @@
+2026-11-18 16:28:59,623 - INFO - Preparing datasets...
+2026-11-18 16:29:13,620 - WARNING - ASPIF file /tmp/tmpqo_sxp57.aspif contains only facts (no non-fact rules).
+2026-11-18 16:29:13,620 - WARNING -     asp 1 0 0
+2026-11-18 16:29:13,620 - WARNING -     1 0 1 1 0 0
+2026-11-18 16:29:13,620 - WARNING -     4 2 a4 1 1
+2026-11-18 16:29:13,620 - WARNING -     0
+2026-11-18 16:29:52,642 - INFO - Loaded 1000 training programs from /home/cryptid/Projects/NDProp/benchmarks/3lp/train_easy.
+2026-11-18 16:29:57,881 - INFO - Loaded 100 evaluation programs from /home/cryptid/Projects/NDProp/benchmarks/3lp/val_easy.
+2026-11-18 16:29:57,883 - INFO - Dataset preparation completed in 58.26 seconds.
+2026-11-18 16:30:05,083 - INFO - Epoch 0001 | train_loss=0.6417 | eval_loss=0.6261 | train_stable=74.80% | eval_stable=82.00% | best_acc=82.00% (epoch 1)
+2026-11-18 16:30:14,739 - INFO - Epoch 0010 | train_loss=0.2684 | eval_loss=0.2530 | train_stable=71.50% | eval_stable=74.00% | best_acc=82.00% (epoch 1)
+2026-11-18 16:30:25,581 - INFO - Epoch 0020 | train_loss=0.1677 | eval_loss=0.1719 | train_stable=82.70% | eval_stable=86.00% | best_acc=89.00% (epoch 15)
+2026-11-18 16:30:36,165 - INFO - Epoch 0030 | train_loss=0.1050 | eval_loss=0.1164 | train_stable=89.60% | eval_stable=85.00% | best_acc=93.00% (epoch 26)
+2026-11-18 16:30:46,867 - INFO - Epoch 0040 | train_loss=0.1194 | eval_loss=0.1006 | train_stable=87.50% | eval_stable=91.00% | best_acc=93.00% (epoch 26)
+2026-11-18 16:30:57,782 - INFO - Epoch 0050 | train_loss=0.0952 | eval_loss=0.0884 | train_stable=90.90% | eval_stable=92.00% | best_acc=95.00% (epoch 46)
+2026-11-18 16:31:08,403 - INFO - Epoch 0060 | train_loss=0.1045 | eval_loss=0.0758 | train_stable=88.90% | eval_stable=92.00% | best_acc=95.00% (epoch 54)
+2026-11-18 16:31:19,047 - INFO - Epoch 0070 | train_loss=0.0918 | eval_loss=0.0531 | train_stable=90.30% | eval_stable=95.00% | best_acc=95.00% (epoch 70)
+2026-11-18 16:31:30,337 - INFO - Epoch 0080 | train_loss=0.0839 | eval_loss=0.0673 | train_stable=92.30% | eval_stable=95.00% | best_acc=97.00% (epoch 71)
+2026-11-18 16:31:41,647 - INFO - Epoch 0090 | train_loss=0.0702 | eval_loss=0.0804 | train_stable=93.30% | eval_stable=93.00% | best_acc=97.00% (epoch 71)
+2026-11-18 16:31:52,594 - INFO - Epoch 0100 | train_loss=0.0731 | eval_loss=0.0430 | train_stable=93.30% | eval_stable=97.00% | best_acc=97.00% (epoch 100)
+2026-11-18 16:32:03,784 - INFO - Epoch 0110 | train_loss=0.0601 | eval_loss=0.0693 | train_stable=95.00% | eval_stable=92.00% | best_acc=98.00% (epoch 106)
+2026-11-18 16:32:14,975 - INFO - Epoch 0120 | train_loss=0.0525 | eval_loss=0.0284 | train_stable=95.80% | eval_stable=98.00% | best_acc=98.00% (epoch 120)
+2026-11-18 16:32:26,338 - INFO - Epoch 0130 | train_loss=0.0585 | eval_loss=0.0372 | train_stable=95.00% | eval_stable=99.00% | best_acc=99.00% (epoch 130)
+2026-11-18 16:32:37,714 - INFO - Epoch 0140 | train_loss=0.0538 | eval_loss=0.0456 | train_stable=95.60% | eval_stable=98.00% | best_acc=99.00% (epoch 132)
+2026-11-18 16:32:48,857 - INFO - Epoch 0150 | train_loss=0.0403 | eval_loss=0.0463 | train_stable=97.10% | eval_stable=96.00% | best_acc=99.00% (epoch 143)
+2026-11-18 16:32:59,746 - INFO - Epoch 0160 | train_loss=0.0455 | eval_loss=0.0389 | train_stable=97.20% | eval_stable=98.00% | best_acc=99.00% (epoch 153)
+2026-11-18 16:33:10,943 - INFO - Epoch 0170 | train_loss=0.0391 | eval_loss=0.0468 | train_stable=97.70% | eval_stable=97.00% | best_acc=99.00% (epoch 153)
+2026-11-18 16:33:21,404 - INFO - Epoch 0180 | train_loss=0.0432 | eval_loss=0.0146 | train_stable=96.70% | eval_stable=100.00% | best_acc=100.00% (epoch 180)
+2026-11-18 16:33:31,779 - INFO - Epoch 0190 | train_loss=0.0388 | eval_loss=0.0520 | train_stable=96.70% | eval_stable=97.00% | best_acc=100.00% (epoch 188)
+2026-11-18 16:33:41,927 - INFO - Epoch 0200 | train_loss=0.0499 | eval_loss=0.0238 | train_stable=95.70% | eval_stable=98.00% | best_acc=100.00% (epoch 188)
+2026-11-18 16:33:52,578 - INFO - Epoch 0210 | train_loss=0.0468 | eval_loss=0.0608 | train_stable=95.40% | eval_stable=96.00% | best_acc=100.00% (epoch 207)
+2026-11-18 16:34:03,197 - INFO - Epoch 0220 | train_loss=0.0386 | eval_loss=0.0357 | train_stable=97.00% | eval_stable=97.00% | best_acc=100.00% (epoch 207)
+2026-11-18 16:34:14,038 - INFO - Epoch 0230 | train_loss=0.0308 | eval_loss=0.0363 | train_stable=98.40% | eval_stable=97.00% | best_acc=100.00% (epoch 207)
+2026-11-18 16:34:25,050 - INFO - Epoch 0240 | train_loss=0.0637 | eval_loss=0.0424 | train_stable=93.90% | eval_stable=95.00% | best_acc=100.00% (epoch 231)
+2026-11-18 16:34:36,060 - INFO - Epoch 0250 | train_loss=0.0302 | eval_loss=0.0460 | train_stable=97.30% | eval_stable=94.00% | best_acc=100.00% (epoch 231)
+2026-11-18 16:34:47,123 - INFO - Epoch 0260 | train_loss=0.0345 | eval_loss=0.0176 | train_stable=97.40% | eval_stable=99.00% | best_acc=100.00% (epoch 231)
+2026-11-18 16:34:57,975 - INFO - Epoch 0270 | train_loss=0.0240 | eval_loss=0.0288 | train_stable=98.30% | eval_stable=99.00% | best_acc=100.00% (epoch 264)
+2026-11-18 16:35:08,546 - INFO - Epoch 0280 | train_loss=0.0336 | eval_loss=0.0471 | train_stable=97.20% | eval_stable=98.00% | best_acc=100.00% (epoch 264)
+2026-11-18 16:35:19,099 - INFO - Epoch 0290 | train_loss=0.0285 | eval_loss=0.0438 | train_stable=97.80% | eval_stable=98.00% | best_acc=100.00% (epoch 284)
+2026-11-18 16:35:30,077 - INFO - Epoch 0300 | train_loss=0.0317 | eval_loss=0.0374 | train_stable=97.70% | eval_stable=97.00% | best_acc=100.00% (epoch 298)
+2026-11-18 16:35:40,328 - INFO - Epoch 0310 | train_loss=0.0263 | eval_loss=0.0259 | train_stable=97.80% | eval_stable=99.00% | best_acc=100.00% (epoch 306)
+2026-11-18 16:35:50,684 - INFO - Epoch 0320 | train_loss=0.0288 | eval_loss=0.0094 | train_stable=97.70% | eval_stable=100.00% | best_acc=100.00% (epoch 320)
+2026-11-18 16:36:01,220 - INFO - Epoch 0330 | train_loss=0.0332 | eval_loss=0.0699 | train_stable=97.50% | eval_stable=95.00% | best_acc=100.00% (epoch 322)
+2026-11-18 16:36:11,907 - INFO - Epoch 0340 | train_loss=0.0281 | eval_loss=0.0283 | train_stable=98.00% | eval_stable=97.00% | best_acc=100.00% (epoch 322)
+2026-11-18 16:36:22,622 - INFO - Epoch 0350 | train_loss=0.0225 | eval_loss=0.0437 | train_stable=98.10% | eval_stable=98.00% | best_acc=100.00% (epoch 346)
+2026-11-18 16:36:33,217 - INFO - Epoch 0360 | train_loss=0.0220 | eval_loss=0.0376 | train_stable=97.80% | eval_stable=98.00% | best_acc=100.00% (epoch 357)
+2026-11-18 16:36:43,796 - INFO - Epoch 0370 | train_loss=0.0285 | eval_loss=0.0226 | train_stable=97.80% | eval_stable=99.00% | best_acc=100.00% (epoch 357)
+2026-11-18 16:36:54,825 - INFO - Epoch 0380 | train_loss=0.0292 | eval_loss=0.0152 | train_stable=98.10% | eval_stable=99.00% | best_acc=100.00% (epoch 357)
+2026-11-18 16:37:05,820 - INFO - Epoch 0390 | train_loss=0.0238 | eval_loss=0.0342 | train_stable=98.20% | eval_stable=97.00% | best_acc=100.00% (epoch 387)
+2026-11-18 16:37:16,892 - INFO - Epoch 0400 | train_loss=0.0246 | eval_loss=0.0162 | train_stable=98.10% | eval_stable=99.00% | best_acc=100.00% (epoch 393)
+2026-11-18 16:37:27,819 - INFO - Epoch 0410 | train_loss=0.0291 | eval_loss=0.0299 | train_stable=97.90% | eval_stable=98.00% | best_acc=100.00% (epoch 406)
+2026-11-18 16:37:38,338 - INFO - Epoch 0420 | train_loss=0.0238 | eval_loss=0.0444 | train_stable=98.50% | eval_stable=95.00% | best_acc=100.00% (epoch 418)
+2026-11-18 16:37:48,632 - INFO - Epoch 0430 | train_loss=0.0229 | eval_loss=0.0149 | train_stable=98.40% | eval_stable=99.00% | best_acc=100.00% (epoch 418)
+2026-11-18 16:37:59,290 - INFO - Epoch 0440 | train_loss=0.0278 | eval_loss=0.0264 | train_stable=97.80% | eval_stable=98.00% | best_acc=100.00% (epoch 433)
+2026-11-18 16:38:10,111 - INFO - Epoch 0450 | train_loss=0.0216 | eval_loss=0.0123 | train_stable=98.80% | eval_stable=100.00% | best_acc=100.00% (epoch 450)
+2026-11-18 16:38:20,489 - INFO - Epoch 0460 | train_loss=0.0237 | eval_loss=0.0229 | train_stable=98.10% | eval_stable=99.00% | best_acc=100.00% (epoch 454)
+2026-11-18 16:38:30,771 - INFO - Epoch 0470 | train_loss=0.0235 | eval_loss=0.0117 | train_stable=97.80% | eval_stable=100.00% | best_acc=100.00% (epoch 470)
+2026-11-18 16:38:41,571 - INFO - Epoch 0480 | train_loss=0.0196 | eval_loss=0.0391 | train_stable=98.60% | eval_stable=98.00% | best_acc=100.00% (epoch 476)
+2026-11-18 16:38:52,011 - INFO - Epoch 0490 | train_loss=0.0186 | eval_loss=0.0080 | train_stable=99.10% | eval_stable=100.00% | best_acc=100.00% (epoch 490)
+2026-11-18 16:39:02,600 - INFO - Epoch 0500 | train_loss=0.0163 | eval_loss=0.0130 | train_stable=98.70% | eval_stable=99.00% | best_acc=100.00% (epoch 499)
+2026-11-18 16:39:13,321 - INFO - Epoch 0510 | train_loss=0.0231 | eval_loss=0.0411 | train_stable=98.70% | eval_stable=97.00% | best_acc=100.00% (epoch 505)
+2026-11-18 16:39:23,749 - INFO - Epoch 0520 | train_loss=0.0197 | eval_loss=0.0229 | train_stable=98.90% | eval_stable=98.00% | best_acc=100.00% (epoch 519)
+2026-11-18 16:39:33,927 - INFO - Epoch 0530 | train_loss=0.0172 | eval_loss=0.0183 | train_stable=99.20% | eval_stable=99.00% | best_acc=100.00% (epoch 527)
+2026-11-18 16:39:44,097 - INFO - Epoch 0540 | train_loss=0.0232 | eval_loss=0.0179 | train_stable=98.70% | eval_stable=100.00% | best_acc=100.00% (epoch 540)
+2026-11-18 16:39:54,426 - INFO - Epoch 0550 | train_loss=0.0174 | eval_loss=0.0194 | train_stable=99.10% | eval_stable=99.00% | best_acc=100.00% (epoch 541)
+2026-11-18 16:40:04,618 - INFO - Epoch 0560 | train_loss=0.0161 | eval_loss=0.0189 | train_stable=98.90% | eval_stable=98.00% | best_acc=100.00% (epoch 559)
+2026-11-18 16:40:15,069 - INFO - Epoch 0570 | train_loss=0.0176 | eval_loss=0.0152 | train_stable=98.70% | eval_stable=99.00% | best_acc=100.00% (epoch 567)
+2026-11-18 16:40:25,277 - INFO - Epoch 0580 | train_loss=0.0166 | eval_loss=0.0134 | train_stable=98.90% | eval_stable=99.00% | best_acc=100.00% (epoch 579)
+2026-11-18 16:40:35,475 - INFO - Epoch 0590 | train_loss=0.0245 | eval_loss=0.0325 | train_stable=98.30% | eval_stable=97.00% | best_acc=100.00% (epoch 585)
+2026-11-18 16:40:45,751 - INFO - Epoch 0600 | train_loss=0.0170 | eval_loss=0.0359 | train_stable=99.00% | eval_stable=98.00% | best_acc=100.00% (epoch 585)
+2026-11-18 16:40:56,106 - INFO - Epoch 0610 | train_loss=0.0200 | eval_loss=0.0116 | train_stable=98.50% | eval_stable=99.00% | best_acc=100.00% (epoch 601)
+2026-11-18 16:41:06,439 - INFO - Epoch 0620 | train_loss=0.0203 | eval_loss=0.0217 | train_stable=98.30% | eval_stable=96.00% | best_acc=100.00% (epoch 601)
+2026-11-18 16:41:16,732 - INFO - Epoch 0630 | train_loss=0.0152 | eval_loss=0.0094 | train_stable=98.90% | eval_stable=100.00% | best_acc=100.00% (epoch 630)
+2026-11-18 16:41:26,961 - INFO - Epoch 0640 | train_loss=0.0201 | eval_loss=0.0086 | train_stable=98.70% | eval_stable=100.00% | best_acc=100.00% (epoch 640)
+2026-11-18 16:41:37,233 - INFO - Epoch 0650 | train_loss=0.0157 | eval_loss=0.0130 | train_stable=99.20% | eval_stable=99.00% | best_acc=100.00% (epoch 642)
+2026-11-18 16:41:47,321 - INFO - Epoch 0660 | train_loss=0.0214 | eval_loss=0.0378 | train_stable=98.70% | eval_stable=97.00% | best_acc=100.00% (epoch 659)
+2026-11-18 16:41:57,468 - INFO - Epoch 0670 | train_loss=0.0189 | eval_loss=0.0078 | train_stable=98.90% | eval_stable=100.00% | best_acc=100.00% (epoch 670)
+2026-11-18 16:42:07,719 - INFO - Epoch 0680 | train_loss=0.0162 | eval_loss=0.0222 | train_stable=98.90% | eval_stable=98.00% | best_acc=100.00% (epoch 670)
+2026-11-18 16:42:18,005 - INFO - Epoch 0690 | train_loss=0.0161 | eval_loss=0.0154 | train_stable=98.70% | eval_stable=99.00% | best_acc=100.00% (epoch 688)
+2026-11-18 16:42:28,322 - INFO - Epoch 0700 | train_loss=0.0189 | eval_loss=0.0233 | train_stable=98.80% | eval_stable=98.00% | best_acc=100.00% (epoch 691)
+2026-11-18 16:42:38,457 - INFO - Epoch 0710 | train_loss=0.0218 | eval_loss=0.0248 | train_stable=98.90% | eval_stable=98.00% | best_acc=100.00% (epoch 706)
+2026-11-18 16:42:48,735 - INFO - Epoch 0720 | train_loss=0.0133 | eval_loss=0.0081 | train_stable=99.20% | eval_stable=100.00% | best_acc=100.00% (epoch 720)
+2026-11-18 16:42:59,097 - INFO - Epoch 0730 | train_loss=0.0183 | eval_loss=0.0157 | train_stable=99.10% | eval_stable=99.00% | best_acc=100.00% (epoch 726)
+2026-11-18 16:43:09,279 - INFO - Epoch 0740 | train_loss=0.0347 | eval_loss=0.0259 | train_stable=97.10% | eval_stable=98.00% | best_acc=100.00% (epoch 736)
+2026-11-18 16:43:19,414 - INFO - Epoch 0750 | train_loss=0.0187 | eval_loss=0.0076 | train_stable=98.60% | eval_stable=100.00% | best_acc=100.00% (epoch 750)
+2026-11-18 16:43:29,877 - INFO - Epoch 0760 | train_loss=0.0118 | eval_loss=0.0299 | train_stable=99.40% | eval_stable=96.00% | best_acc=100.00% (epoch 757)
+2026-11-18 16:43:40,026 - INFO - Epoch 0770 | train_loss=0.0216 | eval_loss=0.0240 | train_stable=98.40% | eval_stable=98.00% | best_acc=100.00% (epoch 768)
+2026-11-18 16:43:50,296 - INFO - Epoch 0780 | train_loss=0.0330 | eval_loss=0.0590 | train_stable=97.10% | eval_stable=93.00% | best_acc=100.00% (epoch 772)
+2026-11-18 16:44:00,441 - INFO - Epoch 0790 | train_loss=0.0189 | eval_loss=0.0058 | train_stable=98.70% | eval_stable=100.00% | best_acc=100.00% (epoch 790)
+2026-11-18 16:44:10,636 - INFO - Epoch 0800 | train_loss=0.0193 | eval_loss=0.0326 | train_stable=98.70% | eval_stable=96.00% | best_acc=100.00% (epoch 790)
+2026-11-18 16:44:21,049 - INFO - Epoch 0810 | train_loss=0.0141 | eval_loss=0.0091 | train_stable=99.30% | eval_stable=100.00% | best_acc=100.00% (epoch 810)
+2026-11-18 16:44:31,245 - INFO - Epoch 0820 | train_loss=0.0201 | eval_loss=0.0158 | train_stable=98.70% | eval_stable=99.00% | best_acc=100.00% (epoch 817)
+2026-11-18 16:44:41,637 - INFO - Epoch 0830 | train_loss=0.0182 | eval_loss=0.0191 | train_stable=98.70% | eval_stable=98.00% | best_acc=100.00% (epoch 817)
+2026-11-18 16:44:51,894 - INFO - Epoch 0840 | train_loss=0.0307 | eval_loss=0.0247 | train_stable=98.10% | eval_stable=97.00% | best_acc=100.00% (epoch 817)
+2026-11-18 16:45:02,081 - INFO - Epoch 0850 | train_loss=0.0111 | eval_loss=0.0206 | train_stable=99.20% | eval_stable=98.00% | best_acc=100.00% (epoch 846)
+2026-11-18 16:45:12,459 - INFO - Epoch 0860 | train_loss=0.0213 | eval_loss=0.0556 | train_stable=98.20% | eval_stable=97.00% | best_acc=100.00% (epoch 846)
+2026-11-18 16:45:22,545 - INFO - Epoch 0870 | train_loss=0.0214 | eval_loss=0.0289 | train_stable=98.60% | eval_stable=98.00% | best_acc=100.00% (epoch 867)
+2026-11-18 16:45:32,689 - INFO - Epoch 0880 | train_loss=0.0127 | eval_loss=0.0065 | train_stable=99.30% | eval_stable=100.00% | best_acc=100.00% (epoch 880)
+2026-11-18 16:45:43,227 - INFO - Epoch 0890 | train_loss=0.0183 | eval_loss=0.0146 | train_stable=98.10% | eval_stable=99.00% | best_acc=100.00% (epoch 881)
+2026-11-18 16:45:53,506 - INFO - Epoch 0900 | train_loss=0.0144 | eval_loss=0.0289 | train_stable=99.10% | eval_stable=98.00% | best_acc=100.00% (epoch 898)
+2026-11-18 16:46:03,778 - INFO - Epoch 0910 | train_loss=0.0144 | eval_loss=0.0132 | train_stable=99.10% | eval_stable=99.00% | best_acc=100.00% (epoch 909)
+2026-11-18 16:46:13,920 - INFO - Epoch 0920 | train_loss=0.0178 | eval_loss=0.0351 | train_stable=99.00% | eval_stable=97.00% | best_acc=100.00% (epoch 918)
+2026-11-18 16:46:24,033 - INFO - Epoch 0930 | train_loss=0.0162 | eval_loss=0.0286 | train_stable=98.70% | eval_stable=98.00% | best_acc=100.00% (epoch 928)
+2026-11-18 16:46:34,331 - INFO - Epoch 0940 | train_loss=0.0217 | eval_loss=0.0136 | train_stable=98.90% | eval_stable=99.00% | best_acc=100.00% (epoch 934)
+2026-11-18 16:46:44,411 - INFO - Epoch 0950 | train_loss=0.0147 | eval_loss=0.0183 | train_stable=98.90% | eval_stable=99.00% | best_acc=100.00% (epoch 948)
+2026-11-18 16:46:54,501 - INFO - Epoch 0960 | train_loss=0.0072 | eval_loss=0.0057 | train_stable=100.00% | eval_stable=100.00% | best_acc=100.00% (epoch 960)
+2026-11-18 16:47:04,696 - INFO - Epoch 0970 | train_loss=0.0118 | eval_loss=0.0209 | train_stable=99.50% | eval_stable=98.00% | best_acc=100.00% (epoch 966)
+2026-11-18 16:47:14,760 - INFO - Epoch 0980 | train_loss=0.0120 | eval_loss=0.0178 | train_stable=99.40% | eval_stable=99.00% | best_acc=100.00% (epoch 979)
+2026-11-18 16:47:25,002 - INFO - Epoch 0990 | train_loss=0.0144 | eval_loss=0.0159 | train_stable=99.10% | eval_stable=99.00% | best_acc=100.00% (epoch 985)
+2026-11-18 16:47:35,297 - INFO - Epoch 1000 | train_loss=0.0205 | eval_loss=0.0297 | train_stable=98.50% | eval_stable=98.00% | best_acc=100.00% (epoch 999)
+2026-11-18 16:47:35,397 - INFO - Training finished.
+2026-11-18 16:47:35,411 - INFO - Sample evaluation program:
+a3 :- a4, a6.
+a7 :- a7, a10.
+a10 :- not a6, not a9.
+a4 :- a5, not a7.
+a3 :- not a4, not a10.
+a6 :- a6, a10.
+a5 :- a4, not a3.
+a5 :- a4, not a8.
+a3 :- a6, not a2.
+a6 :- a1, not a2.
+a6 :- a3, not a2.
+a5 :- not a3, not a8.
+a5 :- not a5, not a10.
+a3 :- a8, not a4.
+a1 :- a6, not a2.
+a3 :- a4, a7.
+a6 :- a7, a8.
+a5 :- a2, a4.
+a5 :- a7, a8.
+a9 :- a3, a6.
+a7 :- a1, not a4.
+a3 :- not a2, not a5.
+a3 :- a5, not a9.
+a4 :- not a1, not a7.
+a6 :- not a3, not a5.
+a5 :- a9, not a3.
+a6 :- a1, not a10.
+a10 :- a7, not a4.
+a1 :- a2, a5.
+a10 :- a10, not a9.
+a4 :- not a7, not a9.
+a4 :- not a3, not a10.
+a5 :- a10, not a1.
+a3 :- a10, not a8.
+a4 :- a9, not a10.
+a8 :- a2, a8.
+a2 :- not a9, not a10.
+a1 :- a4, not a3.
+a3 :- not a6, not a10.
+a6 :- a5, not a8.
+a1 :- not a4, not a6.
+a9 :- not a1, not a9.
+a4 :- not a7, not a8.
+a10 :- a7, not a5.
+a1 :- a1, not a10.
+a5 :- a9, not a2.
+a5 :- a6, a10.
+a4 :- a3, not a8.
+a9 :- a7, not a5.
+a9 :- not a2, not a3.
+2026-11-18 16:47:35,411 - INFO - Actual answer set: ['a1', 'a3', 'a4', 'a5', 'a6', 'a9']
+2026-11-18 16:47:35,411 - INFO - Predicted answer set: ['a1', 'a3', 'a4', 'a5', 'a6', 'a9']
+2026-11-18 16:47:35,411 - INFO - Exact match: True

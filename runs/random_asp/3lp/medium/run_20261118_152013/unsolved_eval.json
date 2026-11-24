@@ -1,0 +1,126 @@
+{
+  "epoch": 1000,
+  "count": 24,
+  "problems": [
+    {
+      "index": 2,
+      "label": "Program_3",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00002.lp"
+    },
+    {
+      "index": 3,
+      "label": "Program_4",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00003.lp"
+    },
+    {
+      "index": 4,
+      "label": "Program_5",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00004.lp"
+    },
+    {
+      "index": 21,
+      "label": "Program_22",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00021.lp"
+    },
+    {
+      "index": 25,
+      "label": "Program_26",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00025.lp"
+    },
+    {
+      "index": 30,
+      "label": "Program_31",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00030.lp"
+    },
+    {
+      "index": 31,
+      "label": "Program_32",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00031.lp"
+    },
+    {
+      "index": 33,
+      "label": "Program_34",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00033.lp"
+    },
+    {
+      "index": 36,
+      "label": "Program_37",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00036.lp"
+    },
+    {
+      "index": 39,
+      "label": "Program_40",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00039.lp"
+    },
+    {
+      "index": 42,
+      "label": "Program_43",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00042.lp"
+    },
+    {
+      "index": 45,
+      "label": "Program_46",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00045.lp"
+    },
+    {
+      "index": 48,
+      "label": "Program_49",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00048.lp"
+    },
+    {
+      "index": 49,
+      "label": "Program_50",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00049.lp"
+    },
+    {
+      "index": 51,
+      "label": "Program_52",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00051.lp"
+    },
+    {
+      "index": 57,
+      "label": "Program_58",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00057.lp"
+    },
+    {
+      "index": 60,
+      "label": "Program_61",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00060.lp"
+    },
+    {
+      "index": 64,
+      "label": "Program_65",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00064.lp"
+    },
+    {
+      "index": 66,
+      "label": "Program_67",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00066.lp"
+    },
+    {
+      "index": 71,
+      "label": "Program_72",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00071.lp"
+    },
+    {
+      "index": 81,
+      "label": "Program_82",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00081.lp"
+    },
+    {
+      "index": 89,
+      "label": "Program_90",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00089.lp"
+    },
+    {
+      "index": 92,
+      "label": "Program_93",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00092.lp"
+    },
+    {
+      "index": 99,
+      "label": "Program_100",
+      "source_path": "/home/cryptid/Projects/NDProp/benchmarks/3lp/val_medium/val_medium_00099.lp"
+    }
+  ]
+}

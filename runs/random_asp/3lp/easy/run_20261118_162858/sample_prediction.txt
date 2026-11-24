@@ -1,0 +1,55 @@
+Program:
+a3 :- a4, a6.
+a7 :- a7, a10.
+a10 :- not a6, not a9.
+a4 :- a5, not a7.
+a3 :- not a4, not a10.
+a6 :- a6, a10.
+a5 :- a4, not a3.
+a5 :- a4, not a8.
+a3 :- a6, not a2.
+a6 :- a1, not a2.
+a6 :- a3, not a2.
+a5 :- not a3, not a8.
+a5 :- not a5, not a10.
+a3 :- a8, not a4.
+a1 :- a6, not a2.
+a3 :- a4, a7.
+a6 :- a7, a8.
+a5 :- a2, a4.
+a5 :- a7, a8.
+a9 :- a3, a6.
+a7 :- a1, not a4.
+a3 :- not a2, not a5.
+a3 :- a5, not a9.
+a4 :- not a1, not a7.
+a6 :- not a3, not a5.
+a5 :- a9, not a3.
+a6 :- a1, not a10.
+a10 :- a7, not a4.
+a1 :- a2, a5.
+a10 :- a10, not a9.
+a4 :- not a7, not a9.
+a4 :- not a3, not a10.
+a5 :- a10, not a1.
+a3 :- a10, not a8.
+a4 :- a9, not a10.
+a8 :- a2, a8.
+a2 :- not a9, not a10.
+a1 :- a4, not a3.
+a3 :- not a6, not a10.
+a6 :- a5, not a8.
+a1 :- not a4, not a6.
+a9 :- not a1, not a9.
+a4 :- not a7, not a8.
+a10 :- a7, not a5.
+a1 :- a1, not a10.
+a5 :- a9, not a2.
+a5 :- a6, a10.
+a4 :- a3, not a8.
+a9 :- a7, not a5.
+a9 :- not a2, not a3.
+
+Actual answer set: ['a1', 'a3', 'a4', 'a5', 'a6', 'a9']
+Predicted answer set: ['a1', 'a3', 'a4', 'a5', 'a6', 'a9']
+Exact match: True
